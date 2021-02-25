@@ -7,14 +7,19 @@ public class Videojuego implements Entregable{
 	private String compañia;
 	
 	public Videojuego() {
+		this.titulo = "Desconocido";
 		this.horas_estimadas = 3;
 		this.entregado = false;
+		this.genero = "Desconocido";
+		this.compañia = "Desconocida";
 	}
 	
 	public Videojuego(String titulo, float horas_estimadas) {
-		this.entregado = false;
 		this.titulo = titulo;
 		this.horas_estimadas = horas_estimadas;
+		this.entregado = false;
+		this.genero = "Desconocido";
+		this.compañia = "Desconocida";
 	}
 	
 	public Videojuego(String titulo, float horas_estimadas, String genero, String compañia) {
@@ -56,13 +61,19 @@ public class Videojuego implements Entregable{
 	public void setCompañia(String compañia) {
 		this.compañia = compañia;
 	}
-	
-	@Override
-	public String toString() {
-		
-		return "";
-	}
 
+	public String entrega() {
+		String texto;
+		
+		if(this.entregado == true) {
+			texto = "Si";
+		} else {
+			texto = "No";
+		}
+		
+		return texto;
+	}
+	
 	@Override
 	public void entregar() {
 		this.entregado = true;
@@ -79,13 +90,17 @@ public class Videojuego implements Entregable{
 	}
 
 	@Override
-	public void compareTo(Object a) {
+	public boolean compareTo(Object a) {
 		if(getHoras_estimadas() > ((Videojuego) a).getHoras_estimadas()) {
-			
-		} else if(getHoras_estimadas() < ((Videojuego) a).getHoras_estimadas()) {
-			
+			return true;
 		} else {
-			
+			return false;
 		}
+	}
+	
+	//titulo, horas estimadas, entregado, género y compañia.
+	@Override
+	public String toString() {
+		return "Videojuego:\n" + "Título: " + getTitulo() + "\nHoras estimadas: " + getHoras_estimadas() + "\nEntregado: " + entrega() + "\nGenero: " + getGenero() + "\nCompañía: " + getCompañia() + "\n";
 	}
 }

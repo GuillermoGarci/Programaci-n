@@ -7,14 +7,18 @@ public class Serie implements Entregable{
 	private String creador;
 	
 	public Serie() {
+		this.titulo = "Desconocido";
 		this.num_temporadas = 3;
 		this.entregado = false;
+		this.genero = "Desconocido";
+		this.creador = "Desconocida";
 	}
 	
 	public Serie(String titulo, String creador) {
+		this.titulo = titulo;
 		this.num_temporadas = 3;
 		this.entregado = false;
-		this.titulo = titulo;
+		this.genero = "Desconocido";
 		this.creador = creador;
 	}
 	
@@ -58,10 +62,16 @@ public class Serie implements Entregable{
 		this.creador = creador;
 	}
 	
-	@Override
-	public String toString() {
+	public String entrega() {
+		String texto;
 		
-		return "";
+		if(this.entregado == true) {
+			texto = "Si";
+		} else {
+			texto = "No";
+		}
+		
+		return texto;
 	}
 
 	@Override
@@ -80,13 +90,16 @@ public class Serie implements Entregable{
 	}
 
 	@Override
-	public void compareTo(Object a) {
+	public boolean compareTo(Object a) {
 		if(getNum_temporadas() > ((Serie) a).getNum_temporadas()) {
-			
-		} else if(getNum_temporadas() < ((Serie) a).getNum_temporadas()) {
-			
-		} else {
-			
+			return true;
+		} else{
+			return false;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Serie:\n" + "Título: " + getTitulo() + "\nNumero de temporadas: " + getNum_temporadas() + "\nEntregado: " + entrega() + "\nGenero: " + getGenero() + "\nCreador: " + getCreador() + "\n";
 	}
 }

@@ -27,20 +27,39 @@ public class Main {
 		
 		for (Videojuego videojuego : videojuegos) {
 			if(videojuego.isEntregado() == true) {
-				videojuego.toString();
+				System.out.println(videojuego.toString());
 				entregados++;
 			}
 		}
 		
 		for (Serie serie : series) {
 			if(serie.isEntregado() == true) {
-				serie.toString();
+				System.out.println(serie.toString());
 				entregados++;
 			}
 		}
 		
 		System.out.println("El número total de series y videojuegos entregados es de: " + entregados);
 		
+		Videojuego videojuegoaux = new Videojuego();
+		videojuegoaux = videojuegos[0];
 		
+		Serie serieaux = new Serie();
+		serieaux = series[0];
+		
+		for(int i = 0; i < videojuegos.length; i++) {
+			if(videojuegoaux.compareTo(videojuegos[i]) == false) {
+				videojuegoaux = videojuegos[i];
+			}
+		}
+		
+		for(int i = 0; i < series.length; i++) {
+			if(serieaux.compareTo(series[i]) == false) {
+				serieaux = series[i];
+			}
+		}
+		
+		System.out.println("\nEl videojuego con más horas es: \n" + videojuegoaux.toString());
+		System.out.println("La serie con más temporadas es: \n" + serieaux.toString());
 	}
 }
