@@ -61,5 +61,5 @@ public class Main {
 		
 		System.out.println("\nEl videojuego con más horas es: \n" + videojuegoaux.toString());
 		System.out.println("La serie con más temporadas es: \n" + serieaux.toString());
-	}
+	}//
 }
