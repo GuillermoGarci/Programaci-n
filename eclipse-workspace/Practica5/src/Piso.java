@@ -1,23 +1,22 @@
 public class Piso extends Inmueble implements Impuestos {
 	private int numeroPiso;
-	private char letraPiso;
+	private char letraPuerta;
 	private boolean estudio;
 
 	public Piso() {
-		sumaImpuesto();
+		this.estudio = false;
 	}
-	
+
 	public Piso(float precio, float metrosCuadrados, String tipoVia, String nombre, int numero, int cp,
 			int numHabitaciones, int numeroPiso, char letraPiso, boolean estudio, boolean alquilado) {
 		super(precio, metrosCuadrados, tipoVia, nombre, numero, cp, numHabitaciones, alquilado);
 		this.numeroPiso = numeroPiso;
-		this.letraPiso = letraPiso;
+		this.letraPuerta = letraPiso;
+		this.estudio = estudio;
 
 		if (estudio == true) {
 			setNumHabitaciones(1);
 		}
-		
-		sumaImpuesto();
 	}
 
 	public int getNumeroPiso() {
@@ -28,12 +27,12 @@ public class Piso extends Inmueble implements Impuestos {
 		this.numeroPiso = numeroPiso;
 	}
 
-	public char getLetraPiso() {
-		return letraPiso;
+	public char getLetraPuerta() {
+		return letraPuerta;
 	}
 
-	public void setLetraPiso(char letraPiso) {
-		this.letraPiso = letraPiso;
+	public void setLetraPuerta(char letraPuerta) {
+		this.letraPuerta = letraPuerta;
 	}
 
 	public boolean isEstudio() {
@@ -55,16 +54,21 @@ public class Piso extends Inmueble implements Impuestos {
 	}
 
 	@Override
-	public void sumaImpuesto() {
+	public float sumaImpuesto() {
+		float precioFinal;
 		if (isAlquilado() == false) {
-			setPrecioFinal(getPrecio() + getPrecio() * IVA / 100);
+//setPrecioFinal(getPrecio() + getPrecio() * IVA / 100);
+			precioFinal = getPrecio() + getPrecio() * IVA / 100;
 		}
-		setPrecioFinal(getPrecio() + getPrecio() * ITP / 100);
+//setPrecioFinal(getPrecio() + getPrecio() * ITP / 100);
+		precioFinal = getPrecio() + getPrecio() * ITP / 100;
+		return precioFinal;
 	}
 
 	@Override
 	public String toString() {
-		return "Piso en " + alquilados() + " : " + getId() + "(ID)" + "\nPrecio: " + getPrecio() + "\nPrecio final: " + getPrecioFinal() + super.toString() + "\nNumero del piso es: " + getNumeroPiso()
-				+ "\nLetra del piso es: " + getLetraPiso() + "\nEstudio: " + estudio();
+		return "Piso en " + alquilados() + " : " + getId() + "(ID)" + "\nPrecio: " + getPrecio() + "\nPrecio final: "
+				+ sumaImpuesto() + super.toString() + "\nNumero del piso es: " + getNumeroPiso()
+				+ "\nLetra de la puerta es: " + getLetraPuerta() + "\nEstudio: " + estudio();
 	}
 }

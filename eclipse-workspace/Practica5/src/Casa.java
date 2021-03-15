@@ -3,9 +3,9 @@ public class Casa extends Inmueble implements Impuestos {
 	private boolean garaje;
 
 	public Casa() {
-		sumaImpuesto();
+
 	}
-	
+
 	public Casa(float precio, float metrosCuadrados, String tipoVia, String nombre, int numero, int cp,
 			int numHabitaciones, boolean jardin, boolean garaje, boolean alquilado) {
 		super(precio, metrosCuadrados, tipoVia, nombre, numero, cp, numHabitaciones, alquilado);
@@ -33,7 +33,7 @@ public class Casa extends Inmueble implements Impuestos {
 	public String jardin() {
 		String texto = "No";
 
-		if (isJardin()) {
+		if (isJardin() == true) {
 			texto = "Si";
 		}
 
@@ -43,7 +43,7 @@ public class Casa extends Inmueble implements Impuestos {
 	public String garaje() {
 		String texto = "No";
 
-		if (isGaraje()) {
+		if (isGaraje() == true) {
 			texto = "Si";
 		}
 
@@ -51,16 +51,20 @@ public class Casa extends Inmueble implements Impuestos {
 	}
 
 	@Override
-	public void sumaImpuesto() {
+	public float sumaImpuesto() {
+		float precioFinal;
 		if (isAlquilado() == false) {
-			setPrecioFinal(getPrecio() + getPrecio() * IVA / 100);
-		} 
-		
-		setPrecioFinal(getPrecio() + getPrecio() * ITP / 100);
+//setPrecioFinal(getPrecio() + getPrecio() * IVA / 100);
+			precioFinal = getPrecio() + getPrecio() * IVA / 100;
+		}
+//setPrecioFinal(getPrecio() + getPrecio() * ITP / 100);
+		precioFinal = getPrecio() + getPrecio() * ITP / 100;
+		return precioFinal;
 	}
 
 	@Override
 	public String toString() {
-		return "Casa en " + alquilados() + " : " + getId() + "(ID)" + "\nPrecio: " + getPrecio() + "\nPrecio final: " + getPrecioFinal() + super.toString() + "\nJardin: " + jardin() + "\nGaraje: " + garaje();
+		return "Casa en " + alquilados() + " : " + getId() + "(ID)" + "\nPrecio: " + getPrecio() + "\nPrecio final: "
+				+ sumaImpuesto() + super.toString() + "\nJardin: " + jardin() + "\nGaraje: " + garaje();
 	}
 }

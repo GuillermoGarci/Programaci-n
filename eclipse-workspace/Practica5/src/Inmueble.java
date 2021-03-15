@@ -33,9 +33,9 @@ Así como el tipo de inmueble que es cada uno de ellos. Es indispensable que el 
 una serie de inmuebles ya existentes al ejecutarse por primera vez, como mínimo cinco inmuebles en alquiler y
 otros cinco en venta. Es indispensable también entregar el diagrama de clases correspondiente al programa realizado.
 Cuidar el feedback con el usuario y comentar el código.*/
-public class Inmueble {
+public abstract class Inmueble {
 	private float precio;
-	private float precioFinal;
+//private float precioFinal;
 	private float metrosCuadrados;
 	private int id;
 	private static int idActual = 1;
@@ -48,15 +48,15 @@ public class Inmueble {
 	private boolean alquilado;
 
 	public Inmueble() {
-		
+		this.id = idActual++;
 	}
-	
+
 	public Inmueble(float precio, float metrosCuadrados, String tipoVia, String nombre, int numero, int cp,
 			int numHabitaciones, boolean alquilado) {
 		this.precio = precio;
 		this.metrosCuadrados = metrosCuadrados;
 		this.id = idActual++;
-		this.direccion = tipoVia + " " + nombre + " " + numero + " " + cp;
+		direccion(tipoVia, nombre, numero, cp);
 		this.tipoVia = tipoVia;
 		this.nombre = nombre;
 		this.numero = numero;
@@ -73,13 +73,12 @@ public class Inmueble {
 		this.precio = precio;
 	}
 
-	public float getPrecioFinal() {
-		return precioFinal;
-	}
-
-	public void setPrecioFinal(float precioFinal) {
-		this.precioFinal = precioFinal;
-	}
+	/*
+	 * public float getPrecioFinal() { return precioFinal; }
+	 *
+	 * public void setPrecioFinal(float precioFinal) { this.precioFinal =
+	 * precioFinal; }
+	 */
 
 	public float getMetrosCuadrados() {
 		return metrosCuadrados;
@@ -153,6 +152,10 @@ public class Inmueble {
 		this.alquilado = alquilado;
 	}
 
+	public String direccion(String tipoVia, String nombre, int numero, int cp) {
+		return this.direccion = tipoVia + " " + nombre + " " + numero + " " + cp;
+	}
+
 	public String alquilados() {
 		String texto = "Venta";
 
@@ -165,6 +168,7 @@ public class Inmueble {
 
 	@Override
 	public String toString() {
-		return "\nLos metros cuadrados: " + getMetrosCuadrados() + "\nLa dirección es: " + getDireccion() + "\nEl número de habitaciones es: " + getNumHabitaciones();
+		return "\nLos metros cuadrados: " + getMetrosCuadrados() + "\nLa dirección es: " + getDireccion()
+				+ "\nEl número de habitaciones es: " + getNumHabitaciones();
 	}
 }
