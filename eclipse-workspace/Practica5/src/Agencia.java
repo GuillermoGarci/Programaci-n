@@ -30,8 +30,10 @@ public class Agencia {
 		Agencia.nombre = nombre;
 	}
 
-	static Scanner scan = new Scanner(System.in);
+	static Scanner scan = new Scanner(System.in);	//Se crea un scanner global
 
+	/*Este metodo recibe un objeto de tipo piso
+	*/
 	public static void rellenarPisos(Piso p) {
 		int x;
 		float z;
@@ -781,15 +783,7 @@ public class Agencia {
 									lista_pisos.clear();
 									lista_casas.clear();
 
-									for (Inmueble Inmuebles : inmuebles) {
-										if (Inmuebles.isAlquilado() == true) {
-											if (Inmuebles instanceof Piso) {
-												lista_pisos.add((Piso) Inmuebles);
-											} else {
-												lista_casas.add((Casa) Inmuebles);
-											}
-										}
-									}
+									diferenciarPisosCasasAlquilados();
 									
 									switch (opcPoC) {
 									case "1":
@@ -891,7 +885,7 @@ public class Agencia {
 									lista_casas.clear();
 
 									for (Inmueble Inmuebles : inmuebles) {
-										if (Inmuebles.isAlquilado() == true) {
+										if (Inmuebles.isAlquilado() == false) {
 											if (Inmuebles instanceof Piso) {
 												lista_pisos.add((Piso) Inmuebles);
 											} else {
@@ -1001,80 +995,63 @@ public class Agencia {
 		} while (!opcPiso.contentEquals("0"));
 	}
 	
+	//Este método muestra solo los pisos en alquiler
 	public static void listarPisosAlquiler() {
-		int vez = 0;
 		System.out.println("Inmuebles en Alquiler");
+		System.out.println("Pisos en Alquiler\n");
 
 		for (Inmueble Inmuebles : inmuebles) {
 			if (Inmuebles.isAlquilado() == true) {
 				if (Inmuebles instanceof Piso) {
-					if (vez == 0) {
-						System.out.println("Pisos en Alquiler\n");
-						System.out.println(Inmuebles.toString() + "\n");
-						vez = 1;
-					} else {
-						System.out.println(Inmuebles.toString() + "\n");
-					}
+					System.out.println(Inmuebles.toString() + "\n");
 				}
 			}
 		}
 	}
 
+	//Este método muestra solo las casas en alquiler
 	public static void listarCasasAlquiler() {
-		int vez = 0;
+		System.out.println("Casas en Alquiler\n");
 
 		for (Inmueble Inmuebles : inmuebles) {
 			if (Inmuebles.isAlquilado() == true) {
 				if (Inmuebles instanceof Casa) {
-					if (vez == 0) {
-						System.out.println("Casas en Alquiler\n");
-						System.out.println(Inmuebles.toString() + "\n");
-						vez = 1;
-					} else {
-						System.out.println(Inmuebles.toString() + "\n");
-					}
+					System.out.println(Inmuebles.toString() + "\n");
 				}
 			}
 		}
 	}
 
+	//Este método muestra solo los pisos en venta
 	public static void listarPisosVenta() {
-		int vez = 0;
 		System.out.println("Inmuebles en Venta");
+		System.out.println("Pisos en Venta\n");
 
 		for (Inmueble Inmuebles : inmuebles) {
 			if (Inmuebles.isAlquilado() == false) {
 				if (Inmuebles instanceof Piso) {
-					if (vez == 0) {
-						System.out.println("Pisos en Venta\n");
-						System.out.println(Inmuebles.toString() + "\n");
-						vez = 1;
-					} else {
-						System.out.println(Inmuebles.toString() + "\n");
-					}
+					System.out.println(Inmuebles.toString() + "\n");
 				}
 			}
 		}
 	}
 
+	//Este método muestra solo las casas en venta
 	public static void listarCasasVenta() {
-		int vez = 0;
+		System.out.println("Casas en Venta\n");
 
 		for (Inmueble Inmuebles : inmuebles) {
 			if (Inmuebles.isAlquilado() == false) {
 				if (Inmuebles instanceof Casa) {
-					if (vez == 0) {
-						System.out.println("Casas en Venta\n");
-						System.out.println(Inmuebles.toString() + "\n");
-						vez = 1;
-					} else {
-						System.out.println(Inmuebles.toString() + "\n");
-					}
+					System.out.println(Inmuebles.toString() + "\n");
 				}
 			}
 		}
 	}
 
+	/*Este método es basicamente un menú. Según lo que teclee el usuario tendrá la opción de salir del menú, 
+	mostrar los inmuebles en alquiler,mostrar los inmuebles en venta o mostrar todos los inmuebles,
+	para ello dentro de las diferentes opciones se llamará a los métodos oportunos*/
 	public static void mostrarInmuebles() {
 		String opcInm = "g";
 
@@ -1134,21 +1111,15 @@ public class Agencia {
 	public static ArrayList<Inmueble> lista_inmueblesalquiler = new ArrayList<Inmueble>();
 	public static ArrayList<Inmueble> lista_inmueblesventa = new ArrayList<Inmueble>();
 
+	/*Método con dos parametros de entrada (ArrayList) que se encarga de ordenar 
+	*/
 	public static void ordenarPorPrecio(ArrayList<Inmueble> lista_inmueblesalquiler,
 			ArrayList<Inmueble> lista_inmueblesventa) {
 		int tamaño, tamañoP, tamañoC;
 
 		tamaño = lista_inmueblesalquiler.size();
 
-		for (Inmueble Inmuebles : inmuebles) {
-			if (Inmuebles.isAlquilado() == true) {
-				if (Inmuebles instanceof Piso) {
-					lista_pisos.add((Piso) Inmuebles);
-				} else {
-					lista_casas.add((Casa) Inmuebles);
-				}
-			}
-		}
+		diferenciarPisosCasasAlquilados();
 
 		Piso auxAP = new Piso();
 		Casa auxAC = new Casa();
@@ -1274,6 +1245,11 @@ public class Agencia {
 		System.out.println("\nFin del programa para listar los pisos por precio");
 	}
 
+	/*Método que se encarga de mostrar los inmuebles entre un rango de precios. Para tener un rango de precios pide  
+	el precio minimo y el precio maximo. Además se encarga de ordenar los inmuebles de mayor a menor precio que esten 
+	en ese rango de precios. Para ordenarlos llama al método ordenarPorPrecio donde le pasa dos argumentos: 
+	un argumento es un ArrayList de inmuebles en alquiler que estan en el rango de precios y el otro argumento 
+	es un ArrayList de los inmuebles en venta que también estan en ese rango de precios*/
 	public static void listarPorPrecio() {
 		float precioMin, precioMax;
 
@@ -1315,15 +1291,7 @@ public class Agencia {
 
 		tamaño = lista_inmueblesalquiler.size();
 
-		for (Inmueble Inmuebles : inmuebles) {
-			if (Inmuebles.isAlquilado() == true) {
-				if (Inmuebles instanceof Piso) {
-					lista_pisos.add((Piso) Inmuebles);
-				} else {
-					lista_casas.add((Casa) Inmuebles);
-				}
-			}
-		}
+		diferenciarPisosCasasAlquilados();
 
 		Piso auxAP = new Piso();
 		Casa auxAC = new Casa();
@@ -1451,6 +1419,10 @@ public class Agencia {
 		System.out.println("\nFin del programa para listar los pisos por precio");
 	}
 
+	/*Método que se encarga de mostrar los inmuebles entre un rango de metros cuadrados. También se encarga de ordenar 
+	los inmuebles según ese rango. Para ordenarlos llama al método ordenarPorMetrosCuadrados donde le pasa dos argumentos: 
+	un argumento es un ArrayList de inmuebles en alquiler que estan en el rango de metros cuadrados y el otro argumento 
+	es un ArrayList de los inmuebles en venta que también estan en ese rango*/
 	public static void listarPorMetrosCuadrados() {
 		float metrosMin, metrosMax;
 
@@ -1485,6 +1457,30 @@ public class Agencia {
 		ordenarPorMetrosCuadrados(lista_inmueblesalquiler, lista_inmueblesventa);
 		lista_inmueblesalquiler.clear();
 		lista_inmueblesventa.clear();
+	}
+	
+	public static void diferenciarPisosCasasAlquilados(){
+		for (Inmueble Inmuebles : inmuebles) {
+			if (Inmuebles.isAlquilado() == true) {
+				if (Inmuebles instanceof Piso) {
+					lista_pisos.add((Piso) Inmuebles);
+				} else {
+					lista_casas.add((Casa) Inmuebles);
+				}
+			}
+		}
+	}
+	
+	public static void diferenciarPisosCasasVenta(){
+		for (Inmueble Inmuebles : inmuebles) {
+			if (Inmuebles.isAlquilado() == false) {
+				if (Inmuebles instanceof Piso) {
+					lista_pisos.add((Piso) Inmuebles);
+				} else {
+					lista_casas.add((Casa) Inmuebles);
+				}
+			}
+		}
 	}
 
 	public static void eliminarInmuebles() {
@@ -1523,15 +1519,7 @@ public class Agencia {
 							lista_pisos.clear();
 							lista_casas.clear();
 
-							for (Inmueble Inmuebles : inmuebles) {
-								if (Inmuebles.isAlquilado() == true) {
-									if (Inmuebles instanceof Piso) {
-										lista_pisos.add((Piso) Inmuebles);
-									} else {
-										lista_casas.add((Casa) Inmuebles);
-									}
-								}
-							}
+							diferenciarPisosCasasAlquilados();
 
 							switch (opcInm) {
 							case "1":
@@ -1727,6 +1715,7 @@ public class Agencia {
 		lista_inmueblesventa.clear();
 	}
 
+	//Este método es el menú principal. Se encarga de mostrar al usuario las opciones para gestionar los inmuebles
 	public static void menu() {
 		Scanner scan = new Scanner(System.in);
 		String opc = "g";
@@ -1760,6 +1749,9 @@ public class Agencia {
 		scan.close();
 	}
 
+	/*En este método se crea un objeto con un nombre de la clase Agencia, también se crea diferentes objetos de las clases
+	Piso y Casa con unos valores impuestos y estos objetos se añaden todos en un ArrayList llamado inmuebles.
+	Por último se llama al menú principal*/
 	public static void main(String[] args) {
 		Agencia agenciaD11 = new Agencia("La inmobiliaria del Distrito 11");
 

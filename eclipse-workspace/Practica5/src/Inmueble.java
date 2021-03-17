@@ -35,7 +35,6 @@ otros cinco en venta. Es indispensable también entregar el diagrama de clases c
 Cuidar el feedback con el usuario y comentar el código.*/
 public abstract class Inmueble {
 	private float precio;
-//private float precioFinal;
 	private float metrosCuadrados;
 	private int id;
 	private static int idActual = 1;
@@ -72,13 +71,6 @@ public abstract class Inmueble {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-
-	/*
-	 * public float getPrecioFinal() { return precioFinal; }
-	 *
-	 * public void setPrecioFinal(float precioFinal) { this.precioFinal =
-	 * precioFinal; }
-	 */
 
 	public float getMetrosCuadrados() {
 		return metrosCuadrados;
@@ -156,16 +148,16 @@ public abstract class Inmueble {
 		return this.direccion = tipoVia + " " + nombre + " " + numero + " " + cp;
 	}
 
+	//Este método será llamado por las subclases en sus toString para mostrar si el piso esta en venta o en alquiler
 	public String alquilados() {
 		String texto = "Venta";
 
-		if (alquilado) {
-			texto = "Alquiler";
-		}
+		if (alquilado) texto = "Alquiler";
 
 		return texto;
 	}
 
+	//Este método muestra algunos datos que tienen los pisos y las casas en común será llamado en las clases Piso y Casa en sus repectivos toString
 	@Override
 	public String toString() {
 		return "\nLos metros cuadrados: " + getMetrosCuadrados() + "\nLa dirección es: " + getDireccion() + "\nEl número de habitaciones es: " + getNumHabitaciones();

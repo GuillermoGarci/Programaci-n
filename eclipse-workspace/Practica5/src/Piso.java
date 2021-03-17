@@ -4,7 +4,7 @@ public class Piso extends Inmueble implements Impuestos {
 	private boolean estudio;
 
 	public Piso() {
-		this.estudio = false;
+		
 	}
 
 	public Piso(float precio, float metrosCuadrados, String tipoVia, String nombre, int numero, int cp,
@@ -43,6 +43,7 @@ public class Piso extends Inmueble implements Impuestos {
 		this.estudio = estudio;
 	}
 
+	//Este método será llamado en el toString para mostrar si el piso es o no un estudio
 	public String estudio() {
 		String texto = "No";
 
@@ -53,18 +54,19 @@ public class Piso extends Inmueble implements Impuestos {
 		return texto;
 	}
 
+	//Este método será llamado en el toString para mostrar el precio con los impuestos
 	@Override
 	public float sumaImpuesto() {
 		float precioFinal;
 		if (isAlquilado() == false) {
-//setPrecioFinal(getPrecio() + getPrecio() * IVA / 100);
 			precioFinal = getPrecio() + getPrecio() * IVA / 100;
 		}
-//setPrecioFinal(getPrecio() + getPrecio() * ITP / 100);
+
 		precioFinal = getPrecio() + getPrecio() * ITP / 100;
 		return precioFinal;
 	}
 
+	//Este toString muestra todos los datos del piso
 	@Override
 	public String toString() {
 		return "Piso en " + alquilados() + " : " + getId() + "(ID)" + "\nPrecio: " + getPrecio() + "\nPrecio final: "
