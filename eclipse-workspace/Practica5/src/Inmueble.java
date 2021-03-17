@@ -168,7 +168,6 @@ public abstract class Inmueble {
 
 	@Override
 	public String toString() {
-		return "\nLos metros cuadrados: " + getMetrosCuadrados() + "\nLa dirección es: " + getDireccion()
-				+ "\nEl número de habitaciones es: " + getNumHabitaciones();
+		return "\nLos metros cuadrados: " + getMetrosCuadrados() + "\nLa dirección es: " + getDireccion() + "\nEl número de habitaciones es: " + getNumHabitaciones();
 	}
 }

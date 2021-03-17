@@ -33,8 +33,9 @@ public class Agencia {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void rellenarPisos(Piso p) {
-		String est = "0";
-		String texto;
+		int x;
+		float z;
+		String est = "0", texto;
 
 		System.out.println("¿El piso es un estudio? (si/no)");
 		texto = scan.next();
@@ -48,11 +49,19 @@ public class Agencia {
 				est = "1";
 			} else if (texto.contentEquals("no")) {
 				System.out.print("Introduce el número de habitaciones del piso: ");
-				p.setNumHabitaciones(scan.nextInt());
+				x = scan.nextInt();
+				
+				while(x < 1) {
+					System.out.println("Error! El número de habitaciones no puede ser menor que uno");
+					System.out.print("Introduce el número de habitaciones del piso: ");
+					x = scan.nextInt();
+				}
+				
+				p.setNumHabitaciones(x);
 				est = "0";
 			} else {
 				est = "2";
-				System.out.println("Error! puedes responder con un si o no");
+				System.out.println("Error! tienes que responder con un si o no");
 				System.out.println("¿El piso es un estudio? (si/no)");
 				texto = scan.next();
 
@@ -61,78 +70,132 @@ public class Agencia {
 		} while (est.contentEquals("2"));
 
 		System.out.print("Introduce el precio del piso: ");
-		p.setPrecio(scan.nextFloat());
+		z = scan.nextFloat();
+		
+		while(z < 0) {
+			System.out.println("Error! El precio del piso no puede ser negativo");
+			System.out.print("Introduce el precio del piso: ");
+			z = scan.nextFloat();
+		}
+		
+		p.setPrecio(z);
 		System.out.print("Introduce los metros cuadrados del piso: ");
-		p.setMetrosCuadrados(scan.nextFloat());
+		z = scan.nextFloat();
+		
+		while(z < 0) {
+			System.out.println("Error! Los metros cuadrados del piso no pueden tener un valor negativo");
+			System.out.print("Introduce los metros cuadrados del piso: ");
+			z = scan.nextFloat();
+		}
+		
+		p.setMetrosCuadrados(z);
 		System.out.print("Introduce la dirección del piso: \n");
-		//scan.nextLine();
 		System.out.print("Introduce el tipo de vía: ");
 		scan.nextLine();
 		p.setTipoVia(scan.nextLine());
 		System.out.print("Introduce el nombre: ");
-		//scan.nextLine();
 		p.setNombre(scan.nextLine());
 		System.out.print("Introduce el número: ");
-		p.setNumero(scan.nextInt());
+		x = scan.nextInt();
+		
+		while(x < 0) {
+			System.out.println("Error! El número del piso no puede ser negativo");
+			System.out.print("Introduce el número: ");
+			x = scan.nextInt();
+		}
+		
+		p.setNumero(x);
 		System.out.print("Introduce el código postal: ");
-		p.setCp(scan.nextInt());
-		/*
-		 * if(est != 1){
-		 * System.out.print("Introduce el número de habitaciones del piso: ");
-		 * p.setNumHabitaciones(scan.nextInt()); }
-		 */
+		x = scan.nextInt();
+		
+		while(x < 0) {
+			System.out.println("Error! El código postal no puede ser negativo");
+			System.out.print("Introduce el código postal: ");
+			x = scan.nextInt();
+		}
+		
+		p.setCp(x);
 		p.setDireccion(p.direccion(p.getTipoVia(), p.getNombre(), p.getNumero(), p.getCp()));
 		System.out.print("Introduce el número del piso: ");
-		p.setNumeroPiso(scan.nextInt());
+		x = scan.nextInt();
+		
+		while(x < 0) {
+			System.out.println("Error! El número del piso no puede ser negativo");
+			System.out.print("Introduce el número del piso: ");
+			x = scan.nextInt();
+		}
+		
+		p.setNumeroPiso(x);
 		System.out.print("Introduce la letra del piso: ");
 		p.setLetraPuerta(scan.next().charAt(0));
-
-		/*do {
-			System.out.println("¿El piso esta en venta o en alquiler? \n  1. En Alquiler\n  2. En Venta ");
-			System.out.println("\nElige una opción: ");
-			est = scan.next();
-
-			switch (est) {
-			case "1":
-				p.setAlquilado(true);
-				break;
-			case "2":
-				p.setAlquilado(false);
-				break;
-			default:
-				System.out.println("ERROR! Ese dato no es válido");
-				break;
-			}
-		} while (est.contentEquals("0"));*/
 
 		inmuebles.add(p);
 	}
 
 	public static void rellenarCasas(Casa c) {
-		String toret = "0";
-		String texto;
-
+		int x;
+		float z = 0f;
+		String toret = "0", texto;
+		
 		System.out.print("Introduce el precio de la casa: ");
-		c.setPrecio(scan.nextFloat());
+		z = scan.nextFloat();
+		
+		while(z < 0) {
+			System.out.println("Error! El precio de la casa no puede ser negativo");
+			System.out.print("Introduce el precio de la casa: ");
+			z = scan.nextFloat();
+		}
+		
+		c.setPrecio(z);
 		System.out.print("Introduce los metros cuadrados de la casa: ");
-		c.setMetrosCuadrados(scan.nextFloat());
+		z = scan.nextFloat();
+		
+		while(z < 0) {
+			System.out.println("Error! Los metros cuadrados de la casa no pueden tener un valor negativo");
+			System.out.print("Introduce los metros cuadrados de la casa: ");
+			z = scan.nextFloat();
+		}
+		
+		c.setMetrosCuadrados(z);
 		System.out.print("Introduce la dirección de la casa: \n");
-		//scan.nextLine();
 		System.out.print("Introduce el tipo de vía: ");
 		scan.nextLine();
 		c.setTipoVia(scan.nextLine());
 		System.out.print("Introduce el nombre: ");
-		//scan.nextLine();
 		c.setNombre(scan.nextLine());
 		System.out.print("Introduce el número: ");
-		c.setNumero(scan.nextInt());
+		x = scan.nextInt();
+		
+		while(x < 0) {
+			System.out.println("Error! El número de la casa no puede ser negativo");
+			System.out.print("Introduce el número: ");
+			x = scan.nextInt();
+		}
+		
+		c.setNumero(x);
 		System.out.print("Introduce el código postal: ");
-		c.setCp(scan.nextInt());
+		x = scan.nextInt();
+		
+		while(x < 0) {
+			System.out.println("Error! El código postal no puede ser negativo");
+			System.out.print("Introduce el código postal: ");
+			x = scan.nextInt();
+		}
+		
+		c.setCp(x);
 		c.setDireccion(c.direccion(c.getTipoVia(), c.getNombre(), c.getNumero(), c.getCp()));
 		System.out.print("Introduce el número de habitaciones de la casa: ");
-		c.setNumHabitaciones(scan.nextInt());
+		x = scan.nextInt();
+		
+		while(x < 1) {
+			System.out.println("Error! El número de habitaciones no puede ser menor que uno");
+			System.out.print("Introduce el número de habitaciones de la casa: ");
+			x = scan.nextInt();
+		}
+		
+		c.setNumHabitaciones(x);
 
-		System.out.println("¿La casa tiene un jardín? (si/no)");
+		System.out.print("¿La casa tiene un jardín? (si/no): ");
 		texto = scan.next();
 
 		texto = texto.toLowerCase();
@@ -147,14 +210,14 @@ public class Agencia {
 			} else {
 				toret = "2";
 				System.out.println("Error! Tienes que responder con un si o no");
-				System.out.println("¿La casa tiene un jardín? (si/no)");
+				System.out.print("¿La casa tiene un jardín? (si/no): ");
 				texto = scan.next();
 
 				texto = texto.toLowerCase();
 			}
-		} while (!toret.contentEquals("2"));
+		} while (!toret.contentEquals("0"));
 
-		System.out.println("¿La casa tiene un garaje? (si/no)");
+		System.out.print("¿La casa tiene un garaje? (si/no): ");
 		texto = scan.next();
 
 		texto = texto.toLowerCase();
@@ -169,30 +232,12 @@ public class Agencia {
 			} else {
 				toret = "2";
 				System.out.println("Error! Tienes que responder con un si o no");
-				System.out.println("¿La casa tiene un garaje? (si/no)");
+				System.out.print("¿La casa tiene un garaje? (si/no): ");
 				texto = scan.next();
 
 				texto = texto.toLowerCase();
 			}
-		} while (!toret.contentEquals("2"));
-
-		/*do {
-			System.out.println("¿La casa esta en venta o en alquiler? \n  1. En Alquiler\n  2. En Venta ");
-			System.out.println("\nElige una opción: ");
-			toret = scan.next();
-
-			switch (toret) {
-			case "1":
-				c.setAlquilado(true);
-				break;
-			case "2":
-				c.setAlquilado(false);
-				break;
-			default:
-				System.out.println("ERROR! Ese dato no es válido");
-				break;
-			}
-		} while (toret.contentEquals("0"));*/
+		} while (!toret.contentEquals("0"));
 
 		inmuebles.add(c);
 	}
@@ -243,7 +288,7 @@ public class Agencia {
 						opcAoV = "0";
 						break;
 					case "0":
-						//System.out.println("\nFin del programa para añadir pisos");
+						
 						break;
 					default:
 						System.out.println("ERROR! Ese dato no es válido");
@@ -288,7 +333,7 @@ public class Agencia {
 						opcAoV = "0";
 						break;
 					case "0":
-						//System.out.println("\nFin del programa para añadir pisos");
+						
 						break;
 					default:
 						System.out.println("ERROR! Ese dato no es válido");
@@ -308,433 +353,654 @@ public class Agencia {
 		} while (!opcInm.contentEquals("0"));
 	}
 
-	public static String modificarPisos(String opcModifcar, int pos_id) {
-		System.out.println("¿Que es lo que quieres modificar del piso?");
-		System.out.println("  1. El precio\n  2. Los metros cuadrados\n  3. La dirección\n  4. El número de habitaciones\n  5. El número del piso\n  6. La letra de la puerta\n  0. Nada(Salir)");
-		System.out.println("\nElige una opción: ");
-		opcModifcar = scan.next();
-
-		switch (opcModifcar) {
-		case "1":
-			System.out.println("El precio actual del piso es: " + inmuebles.get(pos_id).getPrecio());
-			System.out.println("¿A que precio quieres cambiarlo?");
-			inmuebles.get(pos_id).setPrecio(scan.nextFloat());
-			System.out.println();
-			break;
-		case "2":
-			System.out.println("Los metros cuadrados del piso es: " + inmuebles.get(pos_id).getMetrosCuadrados());
-			System.out.println("¿A cuantos metros cuadrados quieres cambiarlo?");
-			inmuebles.get(pos_id).setMetrosCuadrados(scan.nextFloat());
-			System.out.println();
-			break;
-		case "3":
-			System.out.println("La dirección actual del piso es: " + inmuebles.get(pos_id).getDireccion());
-			System.out.println("¿A que dirección quieres cambiarlo?");
-			scan.nextLine();
-			inmuebles.get(pos_id).setDireccion(scan.nextLine());
-			System.out.println();
-			break;
-		case "4":
-			int toret = 0;
-			String texto;
-
-			if ((((Piso) inmuebles.get(pos_id))).isEstudio() == true) {
-				System.out.println("Actualmente el piso es un estudio\n¿Va a dejar de ser un estudio? (si/no)");
-				texto = scan.next();
-
-				texto = texto.toLowerCase();
-				do {
-					if (texto.contentEquals("si")) {
-						System.out.println("¿A cúantas habitaciones quieres cambiarlo?");
-						inmuebles.get(pos_id).setNumHabitaciones(scan.nextInt());
-						((Piso) inmuebles.get(pos_id)).setEstudio(false);
-						toret = 2;
-					} else if (texto.contentEquals("no")) {
-						System.out.println("Actualmente el piso sigue siendo un estudio");
-						toret = 2;
-					} else {
-						toret = 0;
-						System.out.println("Error! Tienes que responder con un si o no");
-						System.out.println("¿El piso va a dejar de ser un estudio? (si/no)");
-						texto = scan.next();
-
-						texto = texto.toLowerCase();
-					}
-				} while (toret != 2);
-			} else {
-				System.out.println("Actualmente el piso no es un estudio\n¿Va a ser un estudio? (si/no)");
-				texto = scan.next();
-
-				texto = texto.toLowerCase();
-				do {
-					if (texto.contentEquals("si")) {
-						inmuebles.get(pos_id).setNumHabitaciones(1);
-						((Piso) inmuebles.get(pos_id)).setEstudio(true);
-						toret = 2;
-						System.out.println("Actualmente el piso ya es un estudio");
-					} else if (texto.contentEquals("no")) {
-						System.out.println("Actualmente el piso sigue sin ser un estudio");
-						toret = 2;
-					} else {
-						toret = 0;
-						System.out.println("Error! Tienes que responder con un si o no");
-						System.out.println("¿El piso va a ser un estudio? (si/no)");
-						texto = scan.next();
-
-						texto = texto.toLowerCase();
-					}
-				} while (toret != 2);
-			}
-			System.out.println();
-			break;
-		case "5":
-			System.out.println("El número actual del piso es: " + ((Piso) inmuebles.get(pos_id)).getNumeroPiso());
-			System.out.println("¿A que número quieres cambiarlo?");
-			((Piso) inmuebles.get(pos_id)).setNumeroPiso(scan.nextInt());
-			System.out.println();
-			break;
-		case "6":
-			System.out.println("La letra actual de la puerta es: " + ((Piso) inmuebles.get(pos_id)).getLetraPuerta());
-			System.out.println("¿A que letra quieres cambiarlo?");
-			((Piso) inmuebles.get(pos_id)).setLetraPuerta(scan.next().charAt(0));
-			System.out.println();
-			break;
-		case "0":
-			break;
-		default:
-			System.out.println("ERROR! Ese dato no es válido");
-			break;
-		}
-
-		return opcModifcar;
-	}
-
-	public static String modificarCasas(String opcModifcar, int pos_id) {
-		int toret = 0;
-		String texto;
-
-		System.out.println("¿Que es lo que quieres modificar del piso?");
-		System.out.println("  1. El precio\n  2. Los metros cuadrados\n  3. La dirección\n  4. El número de habitaciones\n  5. Jardín\n  6. Garaje\n  0. Nada(Salir)");
-		System.out.println("\nElige una opción: ");
-		opcModifcar = scan.next();
-
-		switch (opcModifcar) {
-		case "1":
-			System.out.println("El precio actual del piso es: " + inmuebles.get(pos_id).getPrecio());
-			System.out.println("¿A que precio quieres cambiarlo?");
-			inmuebles.get(pos_id).setPrecio(scan.nextFloat());
-			System.out.println();
-			break;
-		case "2":
-			System.out.println("Los metros cuadrados del piso es: " + inmuebles.get(pos_id).getMetrosCuadrados());
-			System.out.println("¿A cuantos metros cuadrados quieres cambiarlo?");
-			inmuebles.get(pos_id).setMetrosCuadrados(scan.nextFloat());
-			System.out.println();
-			break;
-		case "3":
-			System.out.println("La dirección actual del piso es: " + inmuebles.get(pos_id).getDireccion());
-			System.out.println("¿A que dirección quieres cambiarlo?");
-			scan.nextLine();
-			inmuebles.get(pos_id).setDireccion(scan.nextLine());
-			System.out.println();
-			break;
-		case "4":
-			System.out.println("El número de habitaciones es: " + inmuebles.get(pos_id).getNumHabitaciones());
-			System.out.println("¿A cuantos habitaciones quieres cambiarlo?");
-			inmuebles.get(pos_id).setNumHabitaciones(scan.nextInt());
-			System.out.println();
-			break;
-		case "5":
-			if ((((Casa) inmuebles.get(pos_id))).isJardin() == true) {
-				System.out.println("Actualmente la casa tiene jardín\n¿Va a dejar de tener jardín? (si/no)");
-				texto = scan.next();
-
-				texto = texto.toLowerCase();
-				do {
-					if (texto.contentEquals("si")) {
-						System.out.println("Actualmente la casa ha dejado de tener jardín");
-						((Casa) inmuebles.get(pos_id)).setJardin(false);
-						toret = 0;
-					} else if (texto.contentEquals("no")) {
-						System.out.println("Actualmente la casa sigue teniendo jardín");
-						toret = 0;
-					} else {
-						toret = 2;
-						System.out.println("Error! Tienes que responder con un si o no");
-						System.out.println("¿Va a dejar de haber un jardín? (si/no)");
-						texto = scan.next();
-
-						texto = texto.toLowerCase();
-					}
-				} while (toret != 2);
-			} else {
-				System.out.println("Actualmente la casa no tiene jardín\n¿Va a tener jardín? (si/no)");
-				texto = scan.next();
-
-				texto = texto.toLowerCase();
-				do {
-					if (texto.contentEquals("si")) {
-						System.out.println("Actualmente la casa tiene jardín");
-						((Casa) inmuebles.get(pos_id)).setJardin(true);
-						toret = 0;
-					} else if (texto.contentEquals("no")) {
-						System.out.println("Actualmente la casa sigue sin tener jardín");
-						toret = 0;
-					} else {
-						toret = 2;
-						System.out.println("Error! Tienes que responder con un si o no");
-						System.out.println("¿La casa va a tener jardín? (si/no)");
-						texto = scan.next();
-
-						texto = texto.toLowerCase();
-					}
-				} while (toret != 2);
-			}
-			System.out.println();
-			break;
-		case "6":
-			if ((((Casa) inmuebles.get(pos_id))).isGaraje() == true) {
-				System.out.println("Actualmente la casa tiene garaje\n¿Va a dejar de tener garaje? (si/no)");
-				texto = scan.nextLine();
-
-				do {
-					if (texto.contentEquals("si")) {
-						System.out.println("Actualmente la casa ha dejado de tener garaje");
-						((Casa) inmuebles.get(pos_id)).setGaraje(false);
-						toret = 0;
-					} else if (texto.contentEquals("no")) {
-						System.out.println("Actualmente la casa sigue teniendo garaje");
-						toret = 0;
-					} else {
-						toret = 2;
-						System.out.println("Error! Tienes que responder con un si o no");
-						System.out.println("¿La casa va a dejar de tener garaje? (si/no)");
-						texto = scan.next();
-
-						texto = texto.toLowerCase();
-					}
-				} while (toret != 2);
-			} else {
-				System.out.println("Actualmente la casa no tiene garaje\n¿Va a tener garaje? (si/no)");
-				texto = scan.nextLine();
-
-				texto = texto.toLowerCase();
-				do {
-					if (texto.contentEquals("si")) {
-						System.out.println("Actualmente la casa tiene garaje");
-						((Casa) inmuebles.get(pos_id)).setGaraje(true);
-						toret = 0;
-					} else if (texto.contentEquals("no")) {
-						System.out.println("Actualmente la casa sigue sin tener garaje");
-						toret = 0;
-					} else {
-						toret = 2;
-						System.out.println("Error! Tienes que responder con un si o no");
-						System.out.println("¿La casa va a tener garaje? (si/no)");
-						texto = scan.next();
-
-						texto = texto.toLowerCase();
-					}
-				} while (toret != 2);
-			}
-			System.out.println();
-			break;
-		case "0":
-			break;
-		default:
-			System.out.println("ERROR! Ese dato no es válido");
-			break;
-		}
-		return opcModifcar;
-	}
-
-	public static void modificarInmuebles() {
-		String opcPiso = "g", opcPoC = "g";
-
+	public static void modificarDireccion(int pos_id) {
+		int x;
+		String opcDirec = "0";
 		do {
-			System.out.println(
-					"¿Quieres modificar un piso en alquiler o un piso en venta?\n  1. Piso en Alquiler\n  2. Piso en Venta\n  0. No modificar ninguno");
+			System.out.println("La dirección actual es: " + inmuebles.get(pos_id).getDireccion());
+			System.out.println("Nota: Teclea el 0 para dejar de modificar el inmueble \n¿Que es lo que quieres modificar de la dirección?");
+			System.out.println("  1. El tipo de vía\n  2. El nombre\n  3. El número\n  4. El código postal\n  5. Cambiar toda la dirección a la vez\n  0. No cambiar nada en la dirección");
 			System.out.println("\nElige una opción: ");
-			opcPiso = scan.next();
-
-			int pos_id = 0;
-
-			switch (opcPiso) {
-
+			opcDirec = scan.next();
+			
+			switch (opcDirec) {
 			case "1":
-				String opcModifcar = "g";
-				int id;
-
-				do {
-					int validoA = 0;
-					do {
-						if (inmuebles.size() != 0) {
-							do {
-								System.out.println("\n¿Quieres modificar un piso o una casa?\n  1. Piso\n  2. Casa\n  0. No modificar ningún inmueble");
-								System.out.println("\nElige una opción: ");
-								opcPoC = scan.next();
-								switch (opcPoC) {
-								case "1":
-									listarPisosAlquiler();
-
-									System.out.println("¿Que piso en alquiler quieres modificar? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no modificar un piso");
-									id = scan.nextInt();
-
-									if (id != -1) {
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id) {
-												validoA = 1;
-												pos_id = i;
-											}
-										}
-										if (validoA == 0) {
-											System.out.println(
-													"Este ID no se corresponde con ningún piso.\nEscribelo de nuevo\n");
-										}
-									} else {
-										validoA = 2;
-										opcModifcar = "0";
-									}
-									break;
-								case "2":
-									listarCasasAlquiler();
-
-									System.out.println("¿Que casa en alquiler quieres modificar? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no modificar una casa");
-									id = scan.nextInt();
-
-									if (id != -1) {
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id) {
-												validoA = 1;
-												pos_id = i;
-											}
-										}
-										if (validoA == 0) {
-											System.out.println(
-													"Este ID no se corresponde con ninguna casa.\nEscribelo de nuevo\n");
-										}
-									} else {
-										validoA = 2;
-										opcModifcar = "0";
-									}
-									break;
-								case "0":
-									//System.out.println("\nFin del programa para modificar inmuebles");
-									break;
-								default:
-									System.out.println("ERROR! Ese dato no es válido");
-									break;
-								}
-								//break;
-							} while (!opcPoC.contentEquals("0"));
-							break;
-						} else {
-							System.out.println("No hay ningún inmueble en alquiler para modificar\n");
-							validoA = 2;
-							opcModifcar = "0";
-						}
-					} while (validoA == 0);
-
-					if (validoA != 2) {
-						modificarPisos(opcModifcar, pos_id);
-					}
-				} while (!opcModifcar.contentEquals("0"));
+				System.out.println("El actual tipo de vía es " + inmuebles.get(pos_id).getTipoVia());
+				System.out.print("Introduce el tipo de vía: ");
+				scan.nextLine();
+				inmuebles.get(pos_id).setTipoVia(scan.nextLine());
+				inmuebles.get(pos_id).setDireccion(inmuebles.get(pos_id).direccion(inmuebles.get(pos_id).getTipoVia(), inmuebles.get(pos_id).getNombre(), inmuebles.get(pos_id).getNumero(), inmuebles.get(pos_id).getCp()));
+				System.out.println();
 				break;
-
 			case "2":
-				opcModifcar = "g";
-				do {
-					int validoV = 0;
-					do {
-						if (inmuebles.size() != 0) {
-							do {
-								System.out.println(
-										"\n¿Quieres modificar un piso o una casa?\n  1. Piso\n  2. Casa\n  0. No modificar ningún inmueble");
-								System.out.println("\nElige una opción: ");
-								opcPoC = scan.next();
-								switch (opcPoC) {
-								case "1":
-									listarPisosVenta();
+				System.out.println("El actual nombre es " + inmuebles.get(pos_id).getNombre());
+				System.out.print("Introduce el nombre: ");
+				scan.nextLine();
+				inmuebles.get(pos_id).setNombre(scan.nextLine());
+				inmuebles.get(pos_id).setDireccion(inmuebles.get(pos_id).direccion(inmuebles.get(pos_id).getTipoVia(), inmuebles.get(pos_id).getNombre(), inmuebles.get(pos_id).getNumero(), inmuebles.get(pos_id).getCp()));
+				System.out.println();
+				break;
+			case "3":
+				System.out.println("El actual número es " + inmuebles.get(pos_id).getNumero());
+				System.out.print("Introduce el número: ");
+				
+				x = scan.nextInt();
+				
+				while(x < 0) {
+					System.out.println("Error! El número no puede ser negativo");
+					System.out.print("Introduce el número: ");
+					x = scan.nextInt();
+				}
+				inmuebles.get(pos_id).setNumero(x);
+				inmuebles.get(pos_id).setDireccion(inmuebles.get(pos_id).direccion(inmuebles.get(pos_id).getTipoVia(), inmuebles.get(pos_id).getNombre(), inmuebles.get(pos_id).getNumero(), inmuebles.get(pos_id).getCp()));
+				System.out.println();
+				break;
+			case "4":
+				System.out.println("El actual código postal es " + inmuebles.get(pos_id).getCp());
+				System.out.print("Introduce el código postal: ");
+				x = scan.nextInt();
+				
+				while(x < 0) {
+					System.out.println("Error! El código postal no puede ser negativo");
+					System.out.print("Introduce el código postal: ");
+					x = scan.nextInt();
+				}
+				inmuebles.get(pos_id).setCp(x);
+				inmuebles.get(pos_id).setDireccion(inmuebles.get(pos_id).direccion(inmuebles.get(pos_id).getTipoVia(), inmuebles.get(pos_id).getNombre(), inmuebles.get(pos_id).getNumero(), inmuebles.get(pos_id).getCp()));
+				System.out.println();
+				break;
+			case "5":
+				System.out.println("La dirección actual es: " + inmuebles.get(pos_id).getDireccion());
+				System.out.print("Introduce el tipo de vía: ");
+				scan.nextLine();
+				inmuebles.get(pos_id).setTipoVia(scan.nextLine());
+				System.out.print("Introduce el nombre: ");
+				inmuebles.get(pos_id).setNombre(scan.nextLine());
+				System.out.print("Introduce el número: ");
+				x = scan.nextInt();
+				
+				while(x < 0) {
+					System.out.println("Error! El número no puede ser negativo");
+					System.out.print("Introduce el número: ");
+					x = scan.nextInt();
+				}
 
-									System.out.println("¿Que piso quieres modificar? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no modificar un piso\n");
-									id = scan.nextInt();
-
-									if (id != -1) {
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id) {
-												validoV = 1;
-												pos_id = i;
-											}
-										}
-
-										if (validoV == 0) {
-											System.out.println(
-													"Este ID no se corresponde con ningún piso.\nEscribelo de nuevo\n");
-										}
-									} else {
-										validoV = 2;
-										opcModifcar = "0";
-									}
-									break;
-								case "2":
-									listarCasasVenta();
-
-									System.out.println("¿Que casa quieres modificar? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no modificar una casa\n");
-									id = scan.nextInt();
-
-									if (id != -1) {
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id) {
-												validoV = 1;
-												pos_id = i;
-											}
-										}
-
-										if (validoV == 0) {
-											System.out.println(
-													"Este ID no se corresponde con ninguna casa.\nEscribelo de nuevo\n");
-										}
-									} else {
-										validoV = 2;
-										opcModifcar = "0";
-									}
-									break;
-								case "0":
-									//System.out.println("\nFin del programa para modificar inmuebles");
-									break;
-								default:
-									System.out.println("ERROR! Ese dato no es válido");
-									break;
-								}
-								break;
-							} while (!opcPoC.contentEquals("0"));
-						} else {
-							System.out.println("No hay ningún inmueble en venta para modificar\n");
-							validoV = 2;
-							opcModifcar = "0";
-						}
-					} while (validoV == 0);
-
-					if (validoV != 2) {
-						modificarCasas(opcModifcar, pos_id);
-					}
-
-				} while (!opcModifcar.contentEquals("0"));
+				inmuebles.get(pos_id).setNumero(x);
+				System.out.print("Introduce el código postal: ");
+				x = scan.nextInt();
+				
+				while(x < 0) {
+					System.out.println("Error! El código postal no puede ser negativo");
+					System.out.print("Introduce el código postal: ");
+					x = scan.nextInt();
+				}
+				inmuebles.get(pos_id).setCp(x);
+				inmuebles.get(pos_id).setDireccion(inmuebles.get(pos_id).direccion(inmuebles.get(pos_id).getTipoVia(), inmuebles.get(pos_id).getNombre(), inmuebles.get(pos_id).getNumero(), inmuebles.get(pos_id).getCp()));
+				System.out.println();
 				break;
 			case "0":
-				System.out.println("\nFin del programa para modificar inmuebles");
+				
 				break;
 			default:
 				System.out.println("ERROR! Ese dato no es válido");
 				break;
 			}
-		} while (!opcPiso.contentEquals("0"));
+		} while (!opcDirec.contentEquals("0"));
+	}
+	
+	public static void modificarPisos(String opcModifcar, int pos_id) {
+		int x;
+		float z = 0f;
+		
+		do {
+			System.out.println(inmuebles.get(pos_id).toString() + "\n");
+			
+			System.out.println("Nota: Teclea el 0 para dejar de modificar el piso \n¿Que es lo que quieres modificar del piso?");
+			System.out.println("  1. El precio\n  2. Los metros cuadrados\n  3. La dirección\n  4. El número de habitaciones\n  5. El número del piso\n  6. La letra de la puerta\n  0. Nada(Salir)");
+			System.out.println("\nElige una opción: ");
+			opcModifcar = scan.next();
+			
+			switch (opcModifcar) {
+			case "1":
+				System.out.println("El precio actual del piso es: " + inmuebles.get(pos_id).getPrecio());
+				System.out.println("¿A que precio quieres cambiarlo?");
+				z = scan.nextFloat();
+				
+				while(z < 0) {
+					System.out.println("Error! El precio del piso no puede ser negativo");
+					System.out.print("Introduce el precio del piso: ");
+					z = scan.nextFloat();
+				}
+				inmuebles.get(pos_id).setPrecio(z);
+				System.out.println();
+				break;
+			case "2":
+				System.out.println("Los metros cuadrados del piso es: " + inmuebles.get(pos_id).getMetrosCuadrados());
+				System.out.println("¿A cuantos metros cuadrados quieres cambiarlo?");
+				z = scan.nextFloat();
+				
+				while(z < 0) {
+					System.out.println("Error! Los metros cuadrados del piso no pueden tener un valor negativo");
+					System.out.print("Introduce los metros cuadrados del piso: ");
+					z = scan.nextFloat();
+				}
+				inmuebles.get(pos_id).setMetrosCuadrados(z);
+				System.out.println();
+				break;
+			case "3":
+				modificarDireccion(pos_id);
+				System.out.println();
+				break;
+			case "4":
+				int toret = 0;
+				String texto;
+
+				if ((((Piso) inmuebles.get(pos_id))).isEstudio() == true) {
+					System.out.println("Actualmente el piso es un estudio\n¿Va a dejar de ser un estudio? (si/no)");
+					texto = scan.next();
+
+					texto = texto.toLowerCase();
+					do {
+						if (texto.contentEquals("si")) {
+							System.out.println("¿A cúantas habitaciones quieres cambiarlo?");
+							x = scan.nextInt();
+							
+							while(x < 1) {
+								System.out.println("Error! El número de habitaciones no puede ser menor que uno");
+								System.out.print("Introduce el número de habitaciones del piso: ");
+								x = scan.nextInt();
+							}
+							inmuebles.get(pos_id).setNumHabitaciones(x);
+							((Piso) inmuebles.get(pos_id)).setEstudio(false);
+							toret = 2;
+						} else if (texto.contentEquals("no")) {
+							System.out.println("Actualmente el piso sigue siendo un estudio");
+							toret = 2;
+						} else {
+							toret = 0;
+							System.out.println("Error! Tienes que responder con un si o no");
+							System.out.println("¿El piso va a dejar de ser un estudio? (si/no)");
+							texto = scan.next();
+
+							texto = texto.toLowerCase();
+						}
+					} while (toret != 2);
+				} else {
+					System.out.println("Actualmente el piso no es un estudio\n¿Va a ser un estudio? (si/no)");
+					texto = scan.next();
+
+					texto = texto.toLowerCase();
+					do {
+						if (texto.contentEquals("si")) {
+							inmuebles.get(pos_id).setNumHabitaciones(1);
+							((Piso) inmuebles.get(pos_id)).setEstudio(true);
+							toret = 2;
+							System.out.println("Actualmente el piso ya es un estudio");
+						} else if (texto.contentEquals("no")) {
+							System.out.println("Actualmente el piso sigue sin ser un estudio");
+							toret = 2;
+						} else {
+							toret = 0;
+							System.out.println("Error! Tienes que responder con un si o no");
+							System.out.println("¿El piso va a ser un estudio? (si/no)");
+							texto = scan.next();
+
+							texto = texto.toLowerCase();
+						}
+					} while (toret != 2);
+				}
+				System.out.println();
+				break;
+			case "5":
+				System.out.println("El número actual del piso es: " + ((Piso) inmuebles.get(pos_id)).getNumeroPiso());
+				System.out.println("¿A que número quieres cambiarlo?");
+				x = scan.nextInt();
+				
+				while(x < 0) {
+					System.out.println("Error! El número del piso no puede ser negativo");
+					System.out.print("Introduce el número del piso: ");
+					x = scan.nextInt();
+				}
+				((Piso) inmuebles.get(pos_id)).setNumeroPiso(x);
+				System.out.println();
+				break;
+			case "6":
+				System.out.println("La letra actual de la puerta es: " + ((Piso) inmuebles.get(pos_id)).getLetraPuerta());
+				System.out.println("¿A que letra quieres cambiarlo?");
+				((Piso) inmuebles.get(pos_id)).setLetraPuerta(scan.next().charAt(0));
+				System.out.println();
+				break;
+			case "0":
+				break;
+			default:
+				System.out.println("ERROR! Ese dato no es válido");
+				break;
+			}
+		} while (!opcModifcar.contentEquals("0"));
 	}
 
+	public static void modificarCasas(String opcModifcar, int pos_id) {
+		int toret = 0, x;
+		float z = 0f;
+		String texto;
+		
+		do {
+			
+			System.out.println(inmuebles.get(pos_id).toString() + "\n");
+			
+			System.out.println("Nota: Teclea el 0 para dejar de modificar la casa \n¿Que es lo que quieres modificar de la casa?");
+			System.out.println("  1. El precio\n  2. Los metros cuadrados\n  3. La dirección\n  4. El número de habitaciones\n  5. Jardín\n  6. Garaje\n  0. Nada(Salir)");
+			System.out.println("\nElige una opción: ");
+			opcModifcar = scan.next();
+
+			switch (opcModifcar) {
+			case "1":
+				System.out.println("El precio actual de la casa es: " + inmuebles.get(pos_id).getPrecio());
+				System.out.println("¿A que precio quieres cambiarlo?");
+				z = scan.nextFloat();
+				
+				while(z < 0) {
+					System.out.println("Error! El precio de la casa no puede ser negativo");
+					System.out.print("Introduce el precio de la casa: ");
+					z = scan.nextFloat();
+				}
+				inmuebles.get(pos_id).setPrecio(z);
+				System.out.println();
+				break;
+			case "2":
+				System.out.println("Los metros cuadrados de la casa es: " + inmuebles.get(pos_id).getMetrosCuadrados());
+				System.out.println("¿A cuantos metros cuadrados quieres cambiarlo?");
+				z = scan.nextFloat();
+				
+				while(z < 0) {
+					System.out.println("Error! Los metros cuadrados de la casa no pueden tener un valor negativo");
+					System.out.print("Introduce los metros cuadrados de la casa: ");
+					z = scan.nextFloat();
+				}
+				inmuebles.get(pos_id).setMetrosCuadrados(z);
+				System.out.println();
+				break;
+			case "3":
+				modificarDireccion(pos_id);
+				System.out.println();
+				break;
+			case "4":
+				System.out.println("El número de habitaciones es: " + inmuebles.get(pos_id).getNumHabitaciones());
+				System.out.println("¿A cuantos habitaciones quieres cambiarlo?");
+				x = scan.nextInt();
+				
+				while(x < 1) {
+					System.out.println("Error! El número de habitaciones no puede ser menor que uno");
+					System.out.print("Introduce el número de habitaciones del piso: ");
+					x = scan.nextInt();
+				}
+				inmuebles.get(pos_id).setNumHabitaciones(x);
+				System.out.println();
+				break;
+			case "5":
+				if ((((Casa) inmuebles.get(pos_id))).isJardin() == true) {
+					System.out.println("Actualmente la casa tiene jardín\n¿Va a dejar de tener jardín? (si/no)");
+					texto = scan.next();
+
+					texto = texto.toLowerCase();
+					do {
+						if (texto.contentEquals("si")) {
+							System.out.println("Actualmente la casa ha dejado de tener jardín");
+							((Casa) inmuebles.get(pos_id)).setJardin(false);
+							toret = 0;
+						} else if (texto.contentEquals("no")) {
+							System.out.println("Actualmente la casa sigue teniendo jardín");
+							toret = 0;
+						} else {
+							toret = 2;
+							System.out.println("Error! Tienes que responder con un si o no");
+							System.out.println("¿Va a dejar de haber un jardín? (si/no)");
+							texto = scan.next();
+
+							texto = texto.toLowerCase();
+						}
+					} while (toret != 2);
+				} else {
+					System.out.println("Actualmente la casa no tiene jardín\n¿Va a tener jardín? (si/no)");
+					texto = scan.next();
+
+					texto = texto.toLowerCase();
+					do {
+						if (texto.contentEquals("si")) {
+							System.out.println("Actualmente la casa tiene jardín");
+							((Casa) inmuebles.get(pos_id)).setJardin(true);
+							toret = 0;
+						} else if (texto.contentEquals("no")) {
+							System.out.println("Actualmente la casa sigue sin tener jardín");
+							toret = 0;
+						} else {
+							toret = 2;
+							System.out.println("Error! Tienes que responder con un si o no");
+							System.out.println("¿La casa va a tener jardín? (si/no)");
+							texto = scan.next();
+
+							texto = texto.toLowerCase();
+						}
+					} while (toret != 2);
+				}
+				System.out.println();
+				break;
+			case "6":
+				if ((((Casa) inmuebles.get(pos_id))).isGaraje() == true) {
+					System.out.println("Actualmente la casa tiene garaje\n¿Va a dejar de tener garaje? (si/no)");
+					texto = scan.nextLine();
+
+					do {
+						if (texto.contentEquals("si")) {
+							System.out.println("Actualmente la casa ha dejado de tener garaje");
+							((Casa) inmuebles.get(pos_id)).setGaraje(false);
+							toret = 0;
+						} else if (texto.contentEquals("no")) {
+							System.out.println("Actualmente la casa sigue teniendo garaje");
+							toret = 0;
+						} else {
+							toret = 2;
+							System.out.println("Error! Tienes que responder con un si o no");
+							System.out.println("¿La casa va a dejar de tener garaje? (si/no)");
+							texto = scan.next();
+
+							texto = texto.toLowerCase();
+						}
+					} while (toret != 2);
+				} else {
+					System.out.println("Actualmente la casa no tiene garaje\n¿Va a tener garaje? (si/no)");
+					texto = scan.nextLine();
+
+					texto = texto.toLowerCase();
+					do {
+						if (texto.contentEquals("si")) {
+							System.out.println("Actualmente la casa tiene garaje");
+							((Casa) inmuebles.get(pos_id)).setGaraje(true);
+							toret = 0;
+						} else if (texto.contentEquals("no")) {
+							System.out.println("Actualmente la casa sigue sin tener garaje");
+							toret = 0;
+						} else {
+							toret = 2;
+							System.out.println("Error! Tienes que responder con un si o no");
+							System.out.println("¿La casa va a tener garaje? (si/no)");
+							texto = scan.next();
+
+							texto = texto.toLowerCase();
+						}
+					} while (toret != 2);
+				}
+				System.out.println();
+				break;
+			case "0":
+				break;
+			default:
+				System.out.println("ERROR! Ese dato no es válido");
+				break;
+			}
+		} while (!opcModifcar.contentEquals("0"));
+	}
+	
+	public static void modificarInmuebles() {
+		String opcPiso = "g", opcPoC = "g";
+
+		do {
+			if(inmuebles.size() != 0) {
+				System.out.println("¿Quieres modificar un piso en alquiler o un piso en venta?\n  1. Piso en Alquiler\n  2. Piso en Venta\n  0. No modificar ningún inmueble");
+				System.out.println("\nElige una opción: ");
+				opcPiso = scan.next();
+
+				int pos_id = 0;
+				
+				lista_inmueblesalquiler.clear();
+				lista_inmueblesventa.clear();
+				
+				for (int i = 0; i < inmuebles.size(); i++) {
+					if (inmuebles.get(i).isAlquilado() == true) {
+						lista_inmueblesalquiler.add(inmuebles.get(i));
+					} else {
+						lista_inmueblesventa.add(inmuebles.get(i));
+					}
+				}
+
+				switch (opcPiso) {
+
+				case "1":
+					String opcModifcar = "g";
+					int id;
+
+					do {
+						int validoA = 0;
+						do {
+							if (lista_inmueblesalquiler.size() != 0) {
+								do {
+									System.out.println("¿Quieres modificar un piso o una casa?\n  1. Piso\n  2. Casa\n  0. No modificar ningún piso o casa en alquiler");
+									System.out.println("\nElige una opción: ");
+									opcPoC = scan.next();
+									
+									lista_pisos.clear();
+									lista_casas.clear();
+
+									for (Inmueble Inmuebles : inmuebles) {
+										if (Inmuebles.isAlquilado() == true) {
+											if (Inmuebles instanceof Piso) {
+												lista_pisos.add((Piso) Inmuebles);
+											} else {
+												lista_casas.add((Casa) Inmuebles);
+											}
+										}
+									}
+									
+									switch (opcPoC) {
+									case "1":
+										do {
+											listarPisosAlquiler();
+
+											System.out.println("¿Que piso en alquiler quieres modificar? (Escribe su ID)");
+											System.out.println("Nota: Digite -1 para no modificar un piso");
+											id = scan.nextInt();
+
+											if (id != -1) {
+												int j = 0;
+												for (int i = 0; i < inmuebles.size(); i++) {
+													if (inmuebles.get(i).getId() == id && lista_pisos.get(j).getId() == id) {
+														validoA = 1;
+														pos_id = i;
+														i = inmuebles.size() - 1;
+													}
+													
+													if(j != lista_pisos.size() - 1) j++;
+												}
+												if (validoA == 0) {
+													System.out.println("Este ID no se corresponde con ningún piso.\nEscribelo de nuevo\n");
+												}
+											} else {
+												validoA = 2;
+												opcModifcar = "0";
+											}
+											
+											if (validoA == 1) {
+												modificarPisos(opcModifcar, pos_id);
+												validoA = 0;
+											}
+										} while(validoA == 0);
+										break;
+									case "2":
+										do {
+											listarCasasAlquiler();
+
+											System.out.println("¿Que casa en alquiler quieres modificar? (Escribe su ID)");
+											System.out.println("Nota: Digite -1 para no modificar una casa");
+											id = scan.nextInt();
+
+											if (id != -1) {
+												int j = 0;
+												for (int i = 0; i < inmuebles.size(); i++) {
+													if (inmuebles.get(i).getId() == id && lista_casas.get(j).getId() == id) {
+														validoA = 1;
+														pos_id = i;
+													}
+													
+													if(j != lista_casas.size() - 1) j++;
+												}
+												if (validoA == 0) {
+													System.out.println("Este ID no se corresponde con ninguna casa.\nEscribelo de nuevo\n");
+												}
+											} else {
+												validoA = 2;
+												opcModifcar = "0";
+											}
+											
+											if (validoA == 1) {
+												modificarCasas(opcModifcar, pos_id);
+												validoA = 0;
+											}
+										} while(validoA == 0);
+										break;
+									case "0":
+										
+										opcModifcar = "0";
+										break;
+									default:
+										System.out.println("ERROR! Ese dato no es válido");
+										break;
+									}
+								} while (!opcPoC.contentEquals("0"));
+								break;
+							} else {
+								System.out.println("No hay ningún inmueble en alquiler para modificar\n");
+								validoA = 2;
+								opcModifcar = "0";
+							}
+						} while (validoA == 0);
+					} while (!opcModifcar.contentEquals("0"));
+					break;
+
+				case "2":
+					opcModifcar = "g";
+					do {
+						int validoV = 0;
+						do {
+							if (lista_inmueblesventa.size() != 0) {
+								do {
+									System.out.println("¿Quieres modificar un piso o una casa?\n  1. Piso\n  2. Casa\n  0. No modificar ningún piso o casa en venta");
+									System.out.println("\nElige una opción: ");
+									opcPoC = scan.next();
+									
+									lista_pisos.clear();
+									lista_casas.clear();
+
+									for (Inmueble Inmuebles : inmuebles) {
+										if (Inmuebles.isAlquilado() == true) {
+											if (Inmuebles instanceof Piso) {
+												lista_pisos.add((Piso) Inmuebles);
+											} else {
+												lista_casas.add((Casa) Inmuebles);
+											}
+										}
+									}
+									
+									switch (opcPoC) {
+									case "1":
+										do {
+											listarPisosVenta();
+
+											System.out.println("¿Que piso quieres modificar? (Escribe su ID)");
+											System.out.println("Nota: Digite -1 para no modificar un piso\n");
+											id = scan.nextInt();
+
+											if (id != -1) {
+												int j = 0;
+												for (int i = 0; i < inmuebles.size(); i++) {
+													if (inmuebles.get(i).getId() == id && lista_pisos.get(j).getId() == id) {
+														validoV = 1;
+														pos_id = i;
+													}
+													
+													if(j != lista_pisos.size() - 1) j++;
+												}
+
+												if (validoV == 0) {
+													System.out.println("Este ID no se corresponde con ningún piso.\nEscribelo de nuevo\n");
+												}
+											} else {
+												validoV = 2;
+												opcModifcar = "0";
+											}
+											
+											if (validoV == 1) {
+												modificarPisos(opcModifcar, pos_id);
+												validoV = 0;
+											}
+										} while(validoV == 0);
+										break;
+									case "2":
+										do {
+											listarCasasVenta();
+
+											System.out.println("¿Que casa quieres modificar? (Escribe su ID)");
+											System.out.println("Nota: Digite -1 para no modificar una casa\n");
+											id = scan.nextInt();
+
+											if (id != -1) {
+												int j = 0;
+												for (int i = 0; i < inmuebles.size(); i++) {
+													if (inmuebles.get(i).getId() == id && lista_casas.get(j).getId() == id) {
+														validoV = 1;
+														pos_id = i;
+													}
+													
+													if(j != lista_casas.size() - 1) j++;
+												}
+
+												if (validoV == 0) {
+													System.out.println("Este ID no se corresponde con ninguna casa.\nEscribelo de nuevo\n");
+												}
+											} else {
+												validoV = 2;
+												opcModifcar = "0";
+											}
+											
+											if (validoV == 1) {
+												modificarCasas(opcModifcar, pos_id);
+												validoV = 0;
+											}
+										} while(validoV == 0);
+										break;
+									case "0":
+										
+										opcModifcar = "0";
+										break;
+									default:
+										System.out.println("ERROR! Ese dato no es válido");
+										break;
+									}
+									break;
+								} while (!opcPoC.contentEquals("0"));
+							} else {
+								System.out.println("No hay ningún inmueble en venta para modificar\n");
+								validoV = 2;
+								opcModifcar = "0";
+							}
+						} while (validoV == 0);
+						
+					} while (!opcModifcar.contentEquals("0"));
+					break;
+				case "0":
+					System.out.println("\nFin del programa para modificar inmuebles");
+					break;
+				default:
+					System.out.println("ERROR! Ese dato no es válido");
+					break;
+				}
+			} else {
+				System.out.println("No queda ningún inmueble para modificar");
+				System.out.println("\nFin del programa para modificar inmuebles");
+				opcPiso = "0";
+			}
+		} while (!opcPiso.contentEquals("0"));
+	}
+	
 	public static void listarPisosAlquiler() {
 		int vez = 0;
 		System.out.println("Inmuebles en Alquiler");
@@ -813,8 +1079,7 @@ public class Agencia {
 		String opcInm = "g";
 
 		do {
-			System.out.println(
-					"¿Como quieres visualizar los inmuebles?\n  1. Visualizar los Inmuebles en Alquiler\n  2. Visualizar los Inmuebles en Venta\n  3. Visualizar todos los Inmuebles\n  0. No visualizar ningún inmueble");
+			System.out.println("¿Como quieres visualizar los inmuebles?\n  1. Visualizar los Inmuebles en Alquiler\n  2. Visualizar los Inmuebles en Venta\n  3. Visualizar todos los Inmuebles\n  0. No visualizar ningún inmueble");
 			System.out.println("\nElige una opción: ");
 			opcInm = scan.next();
 			switch (opcInm) {
@@ -1019,8 +1284,7 @@ public class Agencia {
 		precioMax = scan.nextFloat();
 
 		while (precioMin > precioMax) {
-			System.out.println(
-					"El precio minimo no puede ser mayor que el precio maximo y el precio maximo no puede ser menor que el precio minimo");
+			System.out.println("El precio minimo no puede ser mayor que el precio maximo y el precio maximo no puede ser menor que el precio minimo");
 			System.out.println("Introduzca el rango de precios que quieres buscar los pisos");
 			System.out.println("Introduzca el precio minimo: ");
 			precioMin = scan.nextFloat();
@@ -1233,6 +1497,9 @@ public class Agencia {
 			System.out.println("\nElige una opción: ");
 			opcAoV = scan.next();
 
+			lista_inmueblesalquiler.clear();
+			lista_inmueblesventa.clear();
+			
 			for (int i = 0; i < inmuebles.size(); i++) {
 				if (inmuebles.get(i).isAlquilado() == true) {
 					lista_inmueblesalquiler.add(inmuebles.get(i));
@@ -1279,7 +1546,6 @@ public class Agencia {
 										int j = 0;
 										for (int i = 0; i < inmuebles.size(); i++) {
 											if (inmuebles.get(i).getId() == id && lista_pisos.get(j).getId() == id) {
-												//inmuebles.remove(lista_pisos.get(i));
 												inmuebles.remove(i);
 												validoA = 1;
 
@@ -1291,8 +1557,7 @@ public class Agencia {
 										}
 
 										if (validoA == 0) {
-											System.out.println(
-													"Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
+											System.out.println("Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
 										}
 									} else {
 										validoA = 1;
@@ -1322,8 +1587,7 @@ public class Agencia {
 										}
 
 										if (validoA == 0) {
-											System.out.println(
-													"Este ID no se corresponde con ninguna casa\nEscribelo de nuevo\n");
+											System.out.println("Este ID no se corresponde con ninguna casa\nEscribelo de nuevo\n");
 										}
 									} else {
 										validoA = 1;
@@ -1333,7 +1597,7 @@ public class Agencia {
 								}
 								break;
 							case "0":
-								//System.out.println("\nFin del programa para alquilar/vender pisos");
+								
 								break;
 							default:
 								System.out.println("ERROR! Ese dato no es válido");
@@ -1394,8 +1658,7 @@ public class Agencia {
 										}
 
 										if (validoV == 0) {
-											System.out.println(
-													"Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
+											System.out.println("Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
 										}
 									} else {
 										validoV = 1;
@@ -1435,7 +1698,7 @@ public class Agencia {
 								}
 								break;
 							case "0":
-								//System.out.println("\nFin del programa para alquilar/vender pisos");7
+								
 								break;
 							default:
 								System.out.println("ERROR! Ese dato no es válido");
@@ -1484,30 +1747,14 @@ public class Agencia {
 			System.out.println("\nIntroduzca una opción para el menú: ");
 			opc = scan.next();
 			switch (opc) {
-			case "1":
-				añadirInmuebles();
-				break;
-			case "2":
-				modificarInmuebles();
-				break;
-			case "3":
-				mostrarInmuebles();
-				break;
-			case "4":
-				listarPorPrecio();
-				break;
-			case "5":
-				listarPorMetrosCuadrados();
-				break;
-			case "6":
-				eliminarInmuebles();
-				break;
-			case "0":
-				System.out.println("\n\nFin del programa");
-				break;
-			default:
-				System.out.println("ERROR! Ese dato no es válido");
-				break;
+			case "1": 	añadirInmuebles(); break;
+			case "2":	modificarInmuebles(); break;
+			case "3":	mostrarInmuebles(); break;
+			case "4":	listarPorPrecio(); break;
+			case "5":	listarPorMetrosCuadrados(); break;
+			case "6":	eliminarInmuebles(); break;
+			case "0":	System.out.println("\n\nFin del programa"); break;
+			default:	System.out.println("ERROR! Ese dato no es válido"); break;
 			}
 		} while (!opc.contentEquals("0"));
 		scan.close();
