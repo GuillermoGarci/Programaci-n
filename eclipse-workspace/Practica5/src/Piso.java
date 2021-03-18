@@ -4,7 +4,7 @@ public class Piso extends Inmueble implements Impuestos {
 	private boolean estudio;
 
 	public Piso() {
-		
+		this.estudio = false;
 	}
 
 	public Piso(float precio, float metrosCuadrados, String tipoVia, String nombre, int numero, int cp,
