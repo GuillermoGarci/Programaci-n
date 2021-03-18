@@ -249,7 +249,7 @@ public class Agencia {
 		int numInm = 0;
 
 		do {
-			System.out.println("\n¿Quieres añadir un inmueble en alquiler o en venta?\n  1. Inmueble en Alquiler\n  2. Inmueble en Venta\n  0. No añadir ningún inmueble");
+			System.out.println("¿Quieres añadir un inmueble en alquiler o en venta?\n  1. Inmueble en Alquiler\n  2. Inmueble en Venta\n  0. No añadir ningún inmueble");
 			System.out.println("\nElige una opción: ");
 			opcInm = scan.next();
 			switch (opcInm) {
@@ -265,7 +265,7 @@ public class Agencia {
 				}
 
 				do {
-					System.out.println("\n¿Quieres añadir un piso o una casa en alquiler?\n  1. Piso\n  2. Casa\n  0. No añadir ningún inmueble");
+					System.out.println("¿Quieres añadir un piso o una casa en alquiler?\n  1. Piso\n  2. Casa\n  0. No añadir ningún inmueble");
 					System.out.println("\nElige una opción: ");
 					opcAoV = scan.next();
 					switch (opcAoV) {
@@ -309,7 +309,7 @@ public class Agencia {
 				}
 
 				do {
-					System.out.println("\n¿Quieres añadir un piso o una casa en venta?\n  1. Piso\n  2. Casa\n  0. No añadir ningún inmueble");
+					System.out.println("¿Quieres añadir un piso o una casa en venta?\n  1. Piso\n  2. Casa\n  0. No añadir ningún inmueble");
 					System.out.println("\nElige una opción: ");
 					opcAoV = scan.next();
 
@@ -1119,8 +1119,16 @@ public class Agencia {
 
 		tamaño = lista_inmueblesalquiler.size();
 
-		diferenciarPisosCasasAlquilados();
-
+		for (Inmueble Inmuebles : lista_inmueblesalquiler) {
+			if (Inmuebles.isAlquilado() == true) {
+				if (Inmuebles instanceof Piso) {
+					lista_pisos.add((Piso) Inmuebles);
+				} else {
+					lista_casas.add((Casa) Inmuebles);
+				}
+			}
+		}
+		
 		Piso auxAP = new Piso();
 		Casa auxAC = new Casa();
 		tamañoP = lista_pisos.size();
@@ -1153,6 +1161,8 @@ public class Agencia {
 						}
 					}
 				}
+			} else {
+				System.out.println("No hay ninguna casa en alquiler entre esos valores");
 			}
 
 			System.out.println("\nInmuebles en Alquiler");
@@ -1161,15 +1171,22 @@ public class Agencia {
 				System.out.println("De mayor a menor precio:\n");
 			}
 
-			for (int i = 0; i < tamañoP; i++) {
-				System.out.println(lista_pisos.get(i).toString() + "\n");
+			if (tamañoP != 0) {
+				System.out.println("Pisos en Alquiler\n");
+				for (int i = 0; i < tamañoP; i++) {
+					System.out.println(lista_pisos.get(i).toString() + "\n");
+				}
 			}
 
-			for (int i = 0; i < tamañoC; i++) {
-				System.out.println(lista_casas.get(i).toString() + "\n");
+			if (tamañoC != 0) {
+				System.out.println("Casas en Alquiler\n");
+				for (int i = 0; i < tamañoC; i++) {
+					System.out.println(lista_casas.get(i).toString() + "\n");
+				}
 			}
+			
 		} else {
-			System.out.println("No hay ninguna casa en alquiler entre esos valores");
+			System.out.println("No hay ningun inmueble en alquiler entre esos valores");
 		}
 
 		lista_pisos.clear();
@@ -1177,7 +1194,7 @@ public class Agencia {
 
 		tamaño = lista_inmueblesventa.size();
 
-		for (Inmueble Inmuebles : inmuebles) {
+		for (Inmueble Inmuebles : lista_inmueblesventa) {
 			if (Inmuebles.isAlquilado() == false) {
 				if (Inmuebles instanceof Piso) {
 					lista_pisos.add((Piso) Inmuebles);
@@ -1229,13 +1246,22 @@ public class Agencia {
 				System.out.println("De mayor a menor precio:\n");
 			}
 
-			for (int i = 0; i < tamañoP; i++) {
-				System.out.println(lista_pisos.get(i).toString() + "\n");
+			if (tamañoP != 0) {
+				System.out.println("Pisos en Venta\n");
+				for (int i = 0; i < tamañoP; i++) {
+					System.out.println(lista_pisos.get(i).toString() + "\n");
+				}
 			}
 
-			for (int i = 0; i < tamañoC; i++) {
-				System.out.println(lista_casas.get(i).toString() + "\n");
+			if (tamañoC != 0) {
+				System.out.println("Casas en Venta\n");
+				for (int i = 0; i < tamañoC; i++) {
+					System.out.println(lista_casas.get(i).toString() + "\n");
+				}
 			}
+			
+
+			
 		} else {
 			System.out.println("No hay ningún inmueble en venta entre esos valores");
 		}
@@ -1291,14 +1317,22 @@ public class Agencia {
 
 		tamaño = lista_inmueblesalquiler.size();
 
-		diferenciarPisosCasasAlquilados();
-
-		Piso auxAP = new Piso();
-		Casa auxAC = new Casa();
-		tamañoP = lista_pisos.size();
-		tamañoC = lista_casas.size();
-
 		if (tamaño != 0) {
+			for (Inmueble Inmuebles : lista_inmueblesalquiler) {
+				if (Inmuebles.isAlquilado() == true) {
+					if (Inmuebles instanceof Piso) {
+						lista_pisos.add((Piso) Inmuebles);
+					} else {
+						lista_casas.add((Casa) Inmuebles);
+					}
+				}
+			}
+
+			Piso auxAP = new Piso();
+			Casa auxAC = new Casa();
+			tamañoP = lista_pisos.size();
+			tamañoC = lista_casas.size();
+
 			if (tamañoP != 0) {
 				auxAP = lista_pisos.get(0);
 				for (int i = 0; i < tamañoP - 1; i++) {
@@ -1351,22 +1385,22 @@ public class Agencia {
 
 		tamaño = lista_inmueblesventa.size();
 
-		for (Inmueble Inmuebles : inmuebles) {
-			if (Inmuebles.isAlquilado() == false) {
-				if (Inmuebles instanceof Piso) {
-					lista_pisos.add((Piso) Inmuebles);
-				} else {
-					lista_casas.add((Casa) Inmuebles);
+		if (tamaño != 0) {
+			for (Inmueble Inmuebles : lista_inmueblesventa) {
+				if (Inmuebles.isAlquilado() == false) {
+					if (Inmuebles instanceof Piso) {
+						lista_pisos.add((Piso) Inmuebles);
+					} else {
+						lista_casas.add((Casa) Inmuebles);
+					}
 				}
 			}
-		}
 
-		Piso auxVP = new Piso();
-		Casa auxVC = new Casa();
-		tamañoP = lista_pisos.size();
-		tamañoC = lista_casas.size();
+			Piso auxVP = new Piso();
+			Casa auxVC = new Casa();
+			tamañoP = lista_pisos.size();
+			tamañoC = lista_casas.size();
 
-		if (tamaño != 0) {
 			if (tamañoP != 0) {
 				auxVP = lista_pisos.get(0);
 				for (int i = 0; i < tamañoP - 1; i++) {
