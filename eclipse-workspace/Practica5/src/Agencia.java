@@ -1553,8 +1553,17 @@ public class Agencia {
 							lista_pisos.clear();
 							lista_casas.clear();
 
-							diferenciarPisosCasasAlquilados();
+							for (Inmueble Inmuebles : lista_inmueblesalquiler) {
+								if (Inmuebles.isAlquilado() == true) {
+									if (Inmuebles instanceof Piso) {
+										lista_pisos.add((Piso) Inmuebles);
+									} else {
+										lista_casas.add((Casa) Inmuebles);
+									}
+								}
+							}
 
+							validoA = 0;
 							switch (opcInm) {
 							case "1":
 								if (lista_pisos.size() != 0){
@@ -1648,7 +1657,7 @@ public class Agencia {
 							lista_pisos.clear();
 							lista_casas.clear();
 
-							for (Inmueble Inmuebles : inmuebles) {
+							for (Inmueble Inmuebles : lista_inmueblesventa) {
 								if (Inmuebles.isAlquilado() == false) {
 									if (Inmuebles instanceof Piso) {
 										lista_pisos.add((Piso) Inmuebles);
@@ -1658,6 +1667,7 @@ public class Agencia {
 								}
 							}
 
+							validoV = 0;
 							switch (opcInm) {
 							case "1":
 								if (lista_pisos.size() != 0){
