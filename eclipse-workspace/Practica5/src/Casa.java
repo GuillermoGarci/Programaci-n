@@ -59,6 +59,7 @@ public class Casa extends Inmueble implements Impuestos {
 		if (isAlquilado() == false) {
 			precioFinal = getPrecio() + getPrecio() * IVA / 100;
 		}
+		
 		precioFinal = getPrecio() + getPrecio() * ITP / 100;
 		return precioFinal;
 	}

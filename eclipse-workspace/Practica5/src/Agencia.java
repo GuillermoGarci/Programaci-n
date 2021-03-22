@@ -32,8 +32,6 @@ public class Agencia {
 
 	static Scanner scan = new Scanner(System.in);	//Se crea un scanner global
 
-	/*Este metodo recibe un objeto de tipo piso
-	*/
 	public static void rellenarPisos(Piso p) {
 		int x;
 		float z;
@@ -260,7 +258,7 @@ public class Agencia {
 
 				while (numInm < 0) {
 					System.out.println("\nEse no es un valor válido");
-					System.out.print("Introduce de nuevo el número de pisos en alquiler a introducir: ");
+					System.out.print("Introduce de nuevo el número de inmuebles en alquiler a introducir: ");
 					numInm = scan.nextInt();
 				}
 
@@ -283,7 +281,7 @@ public class Agencia {
 						for (int i = 0; i < numInm; i++) {
 							Casa c = new Casa();
 
-							System.out.println("\nPara la casa en Alquiler " + c.getId() + "(ID)");
+							System.out.println("\nPara la Casa en Alquiler " + c.getId() + "(ID)");
 							c.setAlquilado(true);
 							rellenarCasas(c);
 						}
@@ -299,12 +297,12 @@ public class Agencia {
 				} while (!opcAoV.contentEquals("0"));
 				break;
 			case "2":
-				System.out.print("Introduce el número de pisos en venta a introducir: ");
+				System.out.print("Introduce el número de inmuebles en venta a introducir: ");
 				numInm = scan.nextInt();
 
 				while (numInm < 0) {
 					System.out.println("\nEse no es un valor válido");
-					System.out.print("Introduce de nuevo el número de pisos en venta a introducir: ");
+					System.out.print("Introduce de nuevo el número de inmuebles en venta a introducir: ");
 					numInm = scan.nextInt();
 				}
 
@@ -783,7 +781,15 @@ public class Agencia {
 									lista_pisos.clear();
 									lista_casas.clear();
 
-									diferenciarPisosCasasAlquilados();
+									for (Inmueble Inmuebles : inmuebles) {
+										if (Inmuebles.isAlquilado() == true) {
+											if (Inmuebles instanceof Piso) {
+												lista_pisos.add((Piso) Inmuebles);
+											} else {
+												lista_casas.add((Casa) Inmuebles);
+											}
+										}
+									}
 									
 									switch (opcPoC) {
 									case "1":
@@ -1111,30 +1117,28 @@ public class Agencia {
 	public static ArrayList<Inmueble> lista_inmueblesalquiler = new ArrayList<Inmueble>();
 	public static ArrayList<Inmueble> lista_inmueblesventa = new ArrayList<Inmueble>();
 
-	/*Método con dos parametros de entrada (ArrayList) que se encarga de ordenar 
-	*/
 	public static void ordenarPorPrecio(ArrayList<Inmueble> lista_inmueblesalquiler,
 			ArrayList<Inmueble> lista_inmueblesventa) {
 		int tamaño, tamañoP, tamañoC;
 
 		tamaño = lista_inmueblesalquiler.size();
 
-		for (Inmueble Inmuebles : lista_inmueblesalquiler) {
-			if (Inmuebles.isAlquilado() == true) {
-				if (Inmuebles instanceof Piso) {
-					lista_pisos.add((Piso) Inmuebles);
-				} else {
-					lista_casas.add((Casa) Inmuebles);
+		if (tamaño != 0) {
+			for (Inmueble Inmuebles : lista_inmueblesalquiler) {
+				if (Inmuebles.isAlquilado() == true) {
+					if (Inmuebles instanceof Piso) {
+						lista_pisos.add((Piso) Inmuebles);
+					} else {
+						lista_casas.add((Casa) Inmuebles);
+					}
 				}
 			}
-		}
-		
-		Piso auxAP = new Piso();
-		Casa auxAC = new Casa();
-		tamañoP = lista_pisos.size();
-		tamañoC = lista_casas.size();
 
-		if (tamaño != 0) {
+			Piso auxAP = new Piso();
+			Casa auxAC = new Casa();
+			tamañoP = lista_pisos.size();
+			tamañoC = lista_casas.size();
+
 			if (tamañoP != 0) {
 				auxAP = lista_pisos.get(0);
 				for (int i = 0; i < tamañoP - 1; i++) {
@@ -1165,28 +1169,32 @@ public class Agencia {
 				System.out.println("No hay ninguna casa en alquiler entre esos valores");
 			}
 
-			System.out.println("\nInmuebles en Alquiler");
-
 			if (tamaño != 1) {
-				System.out.println("De mayor a menor precio:\n");
+				System.out.println("\nInmuebles en Alquiler");
 			}
 
-			if (tamañoP != 0) {
-				System.out.println("Pisos en Alquiler\n");
+			if (tamañoP == 1) {
+				System.out.println("Piso en Alquiler\n");
+				System.out.println(lista_pisos.get(0).toString() + "\n");
+			} else if (tamañoP != 0){
+				System.out.println("Pisos en Alquiler de mayor a menor precio:\n");
 				for (int i = 0; i < tamañoP; i++) {
 					System.out.println(lista_pisos.get(i).toString() + "\n");
-				}
+				} 
 			}
-
-			if (tamañoC != 0) {
-				System.out.println("Casas en Alquiler\n");
+			
+			if (tamañoC == 1) {
+				System.out.println("Casa en Alquiler\n");
+				System.out.println(lista_casas.get(0).toString() + "\n");
+			} else if (tamañoC != 0){
+				System.out.println("Casas en Alquiler de mayor a menor precio:\n");
 				for (int i = 0; i < tamañoC; i++) {
 					System.out.println(lista_casas.get(i).toString() + "\n");
 				}
 			}
-			
+
 		} else {
-			System.out.println("No hay ningun inmueble en alquiler entre esos valores");
+			System.out.println("No hay ningún inmueble en alquiler entre esos valores");
 		}
 
 		lista_pisos.clear();
@@ -1194,22 +1202,22 @@ public class Agencia {
 
 		tamaño = lista_inmueblesventa.size();
 
-		for (Inmueble Inmuebles : lista_inmueblesventa) {
-			if (Inmuebles.isAlquilado() == false) {
-				if (Inmuebles instanceof Piso) {
-					lista_pisos.add((Piso) Inmuebles);
-				} else {
-					lista_casas.add((Casa) Inmuebles);
+		if (tamaño != 0) {
+			for (Inmueble Inmuebles : lista_inmueblesventa) {
+				if (Inmuebles.isAlquilado() == false) {
+					if (Inmuebles instanceof Piso) {
+						lista_pisos.add((Piso) Inmuebles);
+					} else {
+						lista_casas.add((Casa) Inmuebles);
+					}
 				}
 			}
-		}
 
-		Piso auxVP = new Piso();
-		Casa auxVC = new Casa();
-		tamañoP = lista_pisos.size();
-		tamañoC = lista_casas.size();
+			Piso auxVP = new Piso();
+			Casa auxVC = new Casa();
+			tamañoP = lista_pisos.size();
+			tamañoC = lista_casas.size();
 
-		if (tamaño != 0) {
 			if (tamañoP != 0) {
 				auxVP = lista_pisos.get(0);
 				for (int i = 0; i < tamañoP - 1; i++) {
@@ -1222,7 +1230,7 @@ public class Agencia {
 					}
 				}
 			} else {
-				System.out.println("No hay ningún piso en alquiler entre esos valores");
+				System.out.println("No hay ningún piso en venta entre esos valores");
 			}
 
 			if (tamañoC != 0) {
@@ -1237,31 +1245,32 @@ public class Agencia {
 					}
 				}
 			} else {
-				System.out.println("No hay ninguna casa en alquiler entre esos valores");
+				System.out.println("No hay ninguna casa en venta entre esos valores");
 			}
-
-			System.out.println("\nInmuebles en Venta");
 
 			if (tamaño != 1) {
-				System.out.println("De mayor a menor precio:\n");
+				System.out.println("\nInmuebles en Venta");
 			}
 
-			if (tamañoP != 0) {
-				System.out.println("Pisos en Venta\n");
+			if (tamañoP == 1) {
+				System.out.println("Piso en Venta\n");
+				System.out.println(lista_pisos.get(0).toString() + "\n");
+			} else if (tamañoP != 0){
+				System.out.println("Pisos en Venta de mayor a menor precio:\n");
 				for (int i = 0; i < tamañoP; i++) {
 					System.out.println(lista_pisos.get(i).toString() + "\n");
-				}
+				} 
 			}
-
-			if (tamañoC != 0) {
-				System.out.println("Casas en Venta\n");
+			
+			if (tamañoC == 1) {
+				System.out.println("Casa en Venta\n");
+				System.out.println(lista_casas.get(0).toString() + "\n");
+			} else if (tamañoC != 0){
+				System.out.println("Casas en Venta de mayor a menor precio:\n");
 				for (int i = 0; i < tamañoC; i++) {
 					System.out.println(lista_casas.get(i).toString() + "\n");
 				}
 			}
-			
-
-			
 		} else {
 			System.out.println("No hay ningún inmueble en venta entre esos valores");
 		}
@@ -1363,19 +1372,30 @@ public class Agencia {
 				System.out.println("No hay ninguna casa en alquiler entre esos valores");
 			}
 
-			System.out.println("\nInmuebles en Alquiler");
-
 			if (tamaño != 1) {
-				System.out.println("De más a menos metros cuadrados:\n");
+				System.out.println("\nInmuebles en Alquiler");
 			}
 
-			for (int i = 0; i < tamañoP; i++) {
-				System.out.println(lista_pisos.get(i).toString() + "\n");
+			if (tamañoP == 1) {
+				System.out.println("Piso en Alquiler\n");
+				System.out.println(lista_pisos.get(0).toString() + "\n");
+			} else if (tamañoP != 0){
+				System.out.println("Pisos en Alquiler de más a menos metros cuadrados:\n");
+				for (int i = 0; i < tamañoP; i++) {
+					System.out.println(lista_pisos.get(i).toString() + "\n");
+				} 
+			}
+			
+			if (tamañoC == 1) {
+				System.out.println("Casa en Alquiler\n");
+				System.out.println(lista_casas.get(0).toString() + "\n");
+			} else if (tamañoC != 0){
+				System.out.println("Casas en Alquiler de más a menos metros cuadrados:\n");
+				for (int i = 0; i < tamañoC; i++) {
+					System.out.println(lista_casas.get(i).toString() + "\n");
+				}
 			}
 
-			for (int i = 0; i < tamañoC; i++) {
-				System.out.println(lista_casas.get(i).toString() + "\n");
-			}
 		} else {
 			System.out.println("No hay ningún inmueble en alquiler entre esos valores");
 		}
@@ -1431,18 +1451,28 @@ public class Agencia {
 				System.out.println("No hay ninguna casa en venta entre esos valores");
 			}
 
-			System.out.println("\nInmuebles en Venta");
-
 			if (tamaño != 1) {
-				System.out.println("De más a menos metros cuadrados:\n");
+				System.out.println("\nInmuebles en Venta");
 			}
 
-			for (int i = 0; i < tamañoP; i++) {
-				System.out.println(lista_pisos.get(i).toString() + "\n");
+			if (tamañoP == 1) {
+				System.out.println("Piso en Venta\n");
+				System.out.println(lista_pisos.get(0).toString() + "\n");
+			} else if (tamañoP != 0){
+				System.out.println("Pisos en Venta de más a menos metros cuadrados:\n");
+				for (int i = 0; i < tamañoP; i++) {
+					System.out.println(lista_pisos.get(i).toString() + "\n");
+				} 
 			}
-
-			for (int i = 0; i < tamañoC; i++) {
-				System.out.println(lista_casas.get(i).toString() + "\n");
+			
+			if (tamañoC == 1) {
+				System.out.println("Casa en Venta\n");
+				System.out.println(lista_casas.get(0).toString() + "\n");
+			} else if (tamañoC != 0){
+				System.out.println("Casas en Venta de más a menos metros cuadrados:\n");
+				for (int i = 0; i < tamañoC; i++) {
+					System.out.println(lista_casas.get(i).toString() + "\n");
+				}
 			}
 		} else {
 			System.out.println("No hay ningún inmueble en venta entre esos valores");
@@ -1450,7 +1480,7 @@ public class Agencia {
 		lista_pisos.clear();
 		lista_casas.clear();
 
-		System.out.println("\nFin del programa para listar los pisos por precio");
+		System.out.println("\nFin del programa para listar los pisos por metros cuadrados");
 	}
 
 	/*Método que se encarga de mostrar los inmuebles entre un rango de metros cuadrados. También se encarga de ordenar 
@@ -1493,30 +1523,6 @@ public class Agencia {
 		lista_inmueblesventa.clear();
 	}
 	
-	public static void diferenciarPisosCasasAlquilados(){
-		for (Inmueble Inmuebles : inmuebles) {
-			if (Inmuebles.isAlquilado() == true) {
-				if (Inmuebles instanceof Piso) {
-					lista_pisos.add((Piso) Inmuebles);
-				} else {
-					lista_casas.add((Casa) Inmuebles);
-				}
-			}
-		}
-	}
-	
-	public static void diferenciarPisosCasasVenta(){
-		for (Inmueble Inmuebles : inmuebles) {
-			if (Inmuebles.isAlquilado() == false) {
-				if (Inmuebles instanceof Piso) {
-					lista_pisos.add((Piso) Inmuebles);
-				} else {
-					lista_casas.add((Casa) Inmuebles);
-				}
-			}
-		}
-	}
-
 	public static void eliminarInmuebles() {
 		String opcAoV = "g";
 		String opcInm = "g";
@@ -1545,6 +1551,14 @@ public class Agencia {
 				do {
 					if (lista_inmueblesalquiler.size() != 0) {
 						do {
+							lista_inmueblesalquiler.clear();
+							
+							for (int i = 0; i < inmuebles.size(); i++) {
+								if (inmuebles.get(i).isAlquilado() == true) {
+									lista_inmueblesalquiler.add(inmuebles.get(i));
+								} 
+							}
+							
 							System.out.println("¿Que tipo de inmueble quieres alquilar?");
 							System.out.println("  1. Piso\n  2. Casa\n  0. Ninguno(Salir)");
 							System.out.println("\nElige una opción: ");
@@ -1566,69 +1580,86 @@ public class Agencia {
 							validoA = 0;
 							switch (opcInm) {
 							case "1":
-								if (lista_pisos.size() != 0){
-									listarPisosAlquiler();
+								do {
+									if (lista_pisos.size() != 0){
+										listarPisosAlquiler();
 
-									System.out.println("¿Que piso quieres alquilar? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no alquilar un piso");
-									id = scan.nextInt();
+										System.out.println("¿Que piso quieres alquilar? (Escribe su ID)");
+										System.out.println("Nota: Digite -1 para no alquilar un piso");
+										id = scan.nextInt();
 
-									if (id != -1) {
-										int j = 0;
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id && lista_pisos.get(j).getId() == id) {
-												inmuebles.remove(i);
-												validoA = 1;
+										if (id != -1) {
+											for (int i = 0; i < inmuebles.size(); i++) {
+												if (inmuebles.get(i).getId() == id) {
+													for (int j = 0; j < lista_inmueblesalquiler.size(); j++) {
+														if (lista_inmueblesalquiler.get(j).getId() == id) {
+															for (int k = 0; k < lista_pisos.size(); k++) {
+																if (lista_pisos.get(k).getId() == id) {
+																	inmuebles.remove(i);
+																	validoA = 1;
 
-												System.out.println("El piso ha sido alquilado\n");
-												i = inmuebles.size() - 1;
+																	System.out.println("El piso ha sido alquilado\n");
+																}
+															}
+														}
+													}
+												}
 											}
-											
-											if(j != lista_pisos.size() - 1) j++;
-										}
 
-										if (validoA == 0) {
-											System.out.println("Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
+											if (validoA == 0) {
+												System.out.println("Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
+											}
+										} else {
+											validoA = 1;
 										}
 									} else {
+										System.out.println("No queda ningún piso para alquilar");
 										validoA = 1;
 									}
-								} else {
-									System.out.println("No queda ningún piso para alquilar");
-								}
+								} while(validoA == 0);
 								break;
 							case "2":
-								if (lista_casas.size() != 0){
-									listarCasasAlquiler();
+								do {
+									if (lista_casas.size() != 0){
+										listarCasasAlquiler();
 
-									System.out.println("¿Que casa quieres alquilar? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no alquilar una casa");
-									id = scan.nextInt();
+										System.out.println("¿Que casa quieres alquilar? (Escribe su ID)");
+										System.out.println("Nota: Digite -1 para no alquilar una casa");
+										id = scan.nextInt();
 
-									if (id != -1) {
-										int j = 0;
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id && lista_casas.get(j).getId() == id) {
-												inmuebles.remove(i);
-												validoA = 1;
+										if (id != -1) {
+											for (int i = 0; i < inmuebles.size(); i++) {
+												if (inmuebles.get(i).getId() == id) {
+													for (int j = 0; j < lista_inmueblesalquiler.size(); j++) {
+														if (lista_inmueblesalquiler.get(j).getId() == id) {
+															for (int k = 0; k < lista_pisos.size(); k++) {
+																if (lista_casas.get(k).getId() == id) {
+																	inmuebles.remove(i);
+																	validoA = 1;
 
-												System.out.println("La casa ha sido alquilado\n");
+																	System.out.println("La casa ha sido alquilada\n");
+																}
+															}
+														}
+													}
+												}
 											}
-											if(j != lista_pisos.size() - 1) j++;
-										}
 
-										if (validoA == 0) {
-											System.out.println("Este ID no se corresponde con ninguna casa\nEscribelo de nuevo\n");
+											if (validoA == 0) {
+												System.out.println("Este ID no se corresponde con ninguna casa\nEscribelo de nuevo\n");
+											}
+										} else {
+											validoA = 1;
 										}
 									} else {
+										System.out.println("No queda ninguna casa para alquilar");
 										validoA = 1;
 									}
-								} else {
-									System.out.println("No queda ninguna casa para alquilar");
-								}
+								} while(validoA == 0);
 								break;
 							case "0":
-								
+								opcInm = "0";
+								validoA = 1;
 								break;
 							default:
 								System.out.println("ERROR! Ese dato no es válido");
@@ -1649,6 +1680,14 @@ public class Agencia {
 					if (lista_inmueblesventa.size() != 0) {
 						opcInm = "g";
 						do {
+							lista_inmueblesventa.clear();
+							
+							for (int i = 0; i < inmuebles.size(); i++) {
+								if (inmuebles.get(i).isAlquilado() == false) {
+									lista_inmueblesventa.add(inmuebles.get(i));
+								} 
+							}
+							
 							System.out.println("¿Que tipo de inmueble quieres vender?");
 							System.out.println("  1. Piso\n  2. Casa\n  0. Ninguno(Salir)");
 							System.out.println("\nElige una opción: ");
@@ -1678,15 +1717,21 @@ public class Agencia {
 									id = scan.nextInt();
 
 									if (id != -1) {
-										int j = 0;
 										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id && lista_pisos.get(j).getId() == id) {
-												inmuebles.remove(i);
-												validoV = 1;
+											if (inmuebles.get(i).getId() == id) {
+												for (int j = 0; j < lista_inmueblesventa.size(); j++) {
+													if (lista_inmueblesventa.get(j).getId() == id) {
+														for (int k = 0; k < lista_pisos.size(); k++) {
+															if (lista_pisos.get(k).getId() == id) {
+																inmuebles.remove(i);
+																validoA = 1;
 
-												System.out.println("El piso ha sido vendido\n");
+																System.out.println("El piso ha sido alquilado\n");
+															}
+														}
+													}
+												}
 											}
-											if(j != lista_pisos.size() - 1) j++;
 										}
 
 										if (validoV == 0) {
@@ -1708,15 +1753,21 @@ public class Agencia {
 									id = scan.nextInt();
 
 									if (id != -1) {
-										int j = 0;
 										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id && lista_casas.get(j).getId() == id) {
-												inmuebles.remove(i);
-												validoV = 1;
+											if (inmuebles.get(i).getId() == id) {
+												for (int j = 0; j < lista_inmueblesventa.size(); j++) {
+													if (lista_inmueblesventa.get(j).getId() == id) {
+														for (int k = 0; k < lista_pisos.size(); k++) {
+															if (lista_casas.get(k).getId() == id) {
+																inmuebles.remove(i);
+																validoA = 1;
 
-												System.out.println("La casa ha sido vendida\n");
+																System.out.println("La casa ha sido alquilada\n");
+															}
+														}
+													}
+												}
 											}
-											if(j != lista_pisos.size() - 1) j++;
 										}
 
 										if (validoV == 0) {
@@ -1730,7 +1781,8 @@ public class Agencia {
 								}
 								break;
 							case "0":
-								
+								opcInm = "0";
+								validoV = 1;
 								break;
 							default:
 								System.out.println("ERROR! Ese dato no es válido");

@@ -13,7 +13,7 @@ public class Piso extends Inmueble implements Impuestos {
 		this.numeroPiso = numeroPiso;
 		this.letraPuerta = letraPiso;
 		this.estudio = estudio;
-
+		
 		if (estudio == true) {
 			setNumHabitaciones(1);
 		}
@@ -58,10 +58,11 @@ public class Piso extends Inmueble implements Impuestos {
 	@Override
 	public float sumaImpuesto() {
 		float precioFinal;
+		
 		if (isAlquilado() == false) {
 			precioFinal = getPrecio() + getPrecio() * IVA / 100;
 		}
-
+		
 		precioFinal = getPrecio() + getPrecio() * ITP / 100;
 		return precioFinal;
 	}
