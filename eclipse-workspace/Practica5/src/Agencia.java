@@ -1632,7 +1632,7 @@ public class Agencia {
 												if (inmuebles.get(i).getId() == id) {
 													for (int j = 0; j < lista_inmueblesalquiler.size(); j++) {
 														if (lista_inmueblesalquiler.get(j).getId() == id) {
-															for (int k = 0; k < lista_pisos.size(); k++) {
+															for (int k = 0; k < lista_casas.size(); k++) {
 																if (lista_casas.get(k).getId() == id) {
 																	inmuebles.remove(i);
 																	validoA = 1;
@@ -1709,76 +1709,84 @@ public class Agencia {
 							validoV = 0;
 							switch (opcInm) {
 							case "1":
-								if (lista_pisos.size() != 0){
-									listarPisosVenta();
+								do {
+									if (lista_pisos.size() != 0){
+										listarPisosVenta();
 
-									System.out.println("¿Que piso quieres vender? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no vender un piso");
-									id = scan.nextInt();
+										System.out.println("¿Que piso quieres vender? (Escribe su ID)");
+										System.out.println("Nota: Digite -1 para no vender un piso");
+										id = scan.nextInt();
 
-									if (id != -1) {
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id) {
-												for (int j = 0; j < lista_inmueblesventa.size(); j++) {
-													if (lista_inmueblesventa.get(j).getId() == id) {
-														for (int k = 0; k < lista_pisos.size(); k++) {
-															if (lista_pisos.get(k).getId() == id) {
-																inmuebles.remove(i);
-																validoA = 1;
+										if (id != -1) {
+											for (int i = 0; i < inmuebles.size(); i++) {
+												if (inmuebles.get(i).getId() == id) {
+													for (int j = 0; j < lista_inmueblesventa.size(); j++) {
+														if (lista_inmueblesventa.get(j).getId() == id) {
+															for (int k = 0; k < lista_pisos.size(); k++) {
+																if (lista_pisos.get(k).getId() == id) {
+																	inmuebles.remove(i);
+																	validoV = 1;
 
-																System.out.println("El piso ha sido alquilado\n");
+																	System.out.println("El piso ha sido alquilado\n");
+																}
 															}
 														}
 													}
 												}
 											}
-										}
 
-										if (validoV == 0) {
-											System.out.println("Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
+											if (validoV == 0) {
+												System.out.println("Este ID no se corresponde con ningún piso\nEscribelo de nuevo\n");
+											}
+										} else {
+											validoV = 1;
 										}
 									} else {
+										System.out.println("No queda ningún piso para alquilar");
 										validoV = 1;
 									}
-								} else {
-									System.out.println("No queda ningún piso para alquilar");
-								}
+								} while(validoV == 0);
+								
 								break;
 							case "2":
-								if (lista_casas.size() != 0){
-									listarCasasVenta();
+								do {
+									if (lista_casas.size() != 0){
+										listarCasasVenta();
 
-									System.out.println("¿Que casa quieres vender? (Escribe su ID)");
-									System.out.println("Nota: Digite -1 para no vender una casa");
-									id = scan.nextInt();
+										System.out.println("¿Que casa quieres vender? (Escribe su ID)");
+										System.out.println("Nota: Digite -1 para no vender una casa");
+										id = scan.nextInt();
 
-									if (id != -1) {
-										for (int i = 0; i < inmuebles.size(); i++) {
-											if (inmuebles.get(i).getId() == id) {
-												for (int j = 0; j < lista_inmueblesventa.size(); j++) {
-													if (lista_inmueblesventa.get(j).getId() == id) {
-														for (int k = 0; k < lista_pisos.size(); k++) {
-															if (lista_casas.get(k).getId() == id) {
-																inmuebles.remove(i);
-																validoA = 1;
+										if (id != -1) {
+											for (int i = 0; i < inmuebles.size(); i++) {
+												if (inmuebles.get(i).getId() == id) {
+													for (int j = 0; j < lista_inmueblesventa.size(); j++) {
+														if (lista_inmueblesventa.get(j).getId() == id) {
+															for (int k = 0; k < lista_casas.size(); k++) {
+																if (lista_casas.get(k).getId() == id) {
+																	inmuebles.remove(i);
+																	validoV = 1;
 
-																System.out.println("La casa ha sido alquilada\n");
+																	System.out.println("La casa ha sido alquilada\n");
+																}
 															}
 														}
 													}
 												}
 											}
-										}
 
-										if (validoV == 0) {
-											System.out.println("Este ID no se corresponde con ninguna casa\nEscribelo de nuevo\n");
+											if (validoV == 0) {
+												System.out.println("Este ID no se corresponde con ninguna casa\nEscribelo de nuevo\n");
+											}
+										} else {
+											validoV = 1;
 										}
 									} else {
+										System.out.println("No queda ninguna casa para alquilar");
 										validoV = 1;
 									}
-								} else {
-									System.out.println("No queda ningún piso para alquilar");
-								}
+								} while(validoV == 0);
+								
 								break;
 							case "0":
 								opcInm = "0";
@@ -1879,4 +1887,4 @@ public class Agencia {
 
 		menu();
 	}
-}
+} //2.172
