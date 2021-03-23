@@ -90,10 +90,43 @@ public class Agencia {
 		
 		p.setMetrosCuadrados(z);
 		System.out.print("Introduce la dirección del piso: \n");
-		System.out.print("Introduce el tipo de vía: ");
-		scan.nextLine();
-		p.setTipoVia(scan.nextLine());
+		String tipoVia = "g";
+		
+		do {
+			System.out.print("Introduce el tipo de vía: ");
+			System.out.println("\n  1. Calle\n  2. Avenida\n  3. Plaza\n  4. Camino\n  5. Carretera\n  6. Paseo\n  0. No añadir ningún tipo de vía");
+			System.out.println("\nElige una opción: ");
+			tipoVia = scan.next();
+			switch (tipoVia) {
+			case "1":
+				p.setTipoVia("Calle");
+				break;
+			case "2":
+				p.setTipoVia("Avenida");
+				break;
+			case "3":
+				p.setTipoVia("Plaza");
+				break;
+			case "4":
+				p.setTipoVia("Camino");
+				break;
+			case "5":
+				p.setTipoVia("Carretera");
+				break;
+			case "6":
+				p.setTipoVia("Paseo");
+				break;
+			case "0":
+				
+				break;
+			default:
+				System.out.println("ERROR! Ese dato no es válido");
+				break;
+			}
+		} while (tipoVia.contentEquals("0"));
+		
 		System.out.print("Introduce el nombre: ");
+		scan.nextLine();
 		p.setNombre(scan.nextLine());
 		System.out.print("Introduce el número: ");
 		x = scan.nextInt();
@@ -158,10 +191,43 @@ public class Agencia {
 		
 		c.setMetrosCuadrados(z);
 		System.out.print("Introduce la dirección de la casa: \n");
-		System.out.print("Introduce el tipo de vía: ");
-		scan.nextLine();
-		c.setTipoVia(scan.nextLine());
+		String tipoVia = "g";
+		
+		do {
+			System.out.print("Introduce el tipo de vía: ");
+			System.out.println("\n  1. Calle\n  2. Avenida\n  3. Plaza\n  4. Camino\n  5. Carretera\n  6. Paseo\n  0. No añadir ningún tipo de vía");
+			System.out.println("\nElige una opción: ");
+			tipoVia = scan.next();
+			switch (tipoVia) {
+			case "1":
+				c.setTipoVia("Calle");
+				break;
+			case "2":
+				c.setTipoVia("Avenida");
+				break;
+			case "3":
+				c.setTipoVia("Plaza");
+				break;
+			case "4":
+				c.setTipoVia("Camino");
+				break;
+			case "5":
+				c.setTipoVia("Carretera");
+				break;
+			case "6":
+				c.setTipoVia("Paseo");
+				break;
+			case "0":
+				
+				break;
+			default:
+				System.out.println("ERROR! Ese dato no es válido");
+				break;
+			}
+		} while (tipoVia.contentEquals("0"));
+		
 		System.out.print("Introduce el nombre: ");
+		scan.nextLine();
 		c.setNombre(scan.nextLine());
 		System.out.print("Introduce el número: ");
 		x = scan.nextInt();
@@ -271,7 +337,7 @@ public class Agencia {
 						for (int i = 0; i < numInm; i++) {
 							Piso p = new Piso();
 
-							System.out.println("\nPara el Piso en Alquiler " + p.getId() + "(ID)");
+							System.out.println("Para el Piso en Alquiler " + p.getId() + "(ID)");
 							p.setAlquilado(true);
 							rellenarPisos(p);
 						}
@@ -281,7 +347,7 @@ public class Agencia {
 						for (int i = 0; i < numInm; i++) {
 							Casa c = new Casa();
 
-							System.out.println("\nPara la Casa en Alquiler " + c.getId() + "(ID)");
+							System.out.println("Para la Casa en Alquiler " + c.getId() + "(ID)");
 							c.setAlquilado(true);
 							rellenarCasas(c);
 						}
@@ -316,7 +382,7 @@ public class Agencia {
 						for (int i = 0; i < numInm; i++) {
 							Piso p = new Piso();
 
-							System.out.println("\nPara el Piso en Venta " + p.getId() + "(ID)");
+							System.out.println("Para el Piso en Venta " + p.getId() + "(ID)");
 							p.setAlquilado(false);
 							rellenarPisos(p);
 						}
@@ -326,7 +392,7 @@ public class Agencia {
 						for (int i = 0; i < numInm; i++) {
 							Casa c = new Casa();
 
-							System.out.println("\nPara la Casa en Venta " + c.getId() + "(ID)");
+							System.out.println("Para la Casa en Venta " + c.getId() + "(ID)");
 							c.setAlquilado(false);
 							rellenarCasas(c);
 						}
@@ -366,9 +432,41 @@ public class Agencia {
 			switch (opcDirec) {
 			case "1":
 				System.out.println("El actual tipo de vía es " + inmuebles.get(pos_id).getTipoVia());
-				System.out.print("Introduce el tipo de vía: ");
-				scan.nextLine();
-				inmuebles.get(pos_id).setTipoVia(scan.nextLine());
+				String tipoVia = "g";
+				
+				do {
+					System.out.print("Introduce el tipo de vía: ");
+					System.out.println("\n  1. Calle\n  2. Avenida\n  3. Plaza\n  4. Camino\n  5. Carretera\n  6. Paseo\n  0. No añadir ningún tipo de vía");
+					System.out.println("\nElige una opción: ");
+					tipoVia = scan.next();
+					switch (tipoVia) {
+					case "1":
+						inmuebles.get(pos_id).setTipoVia("Calle");
+						break;
+					case "2":
+						inmuebles.get(pos_id).setTipoVia("Avenida");
+						break;
+					case "3":
+						inmuebles.get(pos_id).setTipoVia("Plaza");
+						break;
+					case "4":
+						inmuebles.get(pos_id).setTipoVia("Camino");
+						break;
+					case "5":
+						inmuebles.get(pos_id).setTipoVia("Carretera");
+						break;
+					case "6":
+						inmuebles.get(pos_id).setTipoVia("Paseo");
+						break;
+					case "0":
+						
+						break;
+					default:
+						System.out.println("ERROR! Ese dato no es válido");
+						break;
+					}
+				} while (tipoVia.contentEquals("0"));
+				
 				inmuebles.get(pos_id).setDireccion(inmuebles.get(pos_id).direccion(inmuebles.get(pos_id).getTipoVia(), inmuebles.get(pos_id).getNombre(), inmuebles.get(pos_id).getNumero(), inmuebles.get(pos_id).getCp()));
 				System.out.println();
 				break;
