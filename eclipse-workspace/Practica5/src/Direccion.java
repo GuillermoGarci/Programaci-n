@@ -1,5 +1,4 @@
 public class Direccion {
-	private String direccion;
 	private String tipoVia;
 	private String nombre;
 	private int numero;
@@ -7,14 +6,6 @@ public class Direccion {
 	
 	public Direccion() {
 		
-	}
-	
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
 	}
 
 	public String getTipoVia() {
@@ -50,6 +41,6 @@ public class Direccion {
 	}
 	
 	public String toString() {
-		return this.direccion = tipoVia + " " + nombre + " " + numero + " " + cp;
+		return tipoVia + " " + nombre + " " + numero + " " + cp;
 	}
 }

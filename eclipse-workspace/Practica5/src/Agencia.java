@@ -90,43 +90,43 @@ public class Agencia {
 		
 		p.setMetrosCuadrados(z);
 		System.out.print("Introduce la dirección del piso: \n");
-		String tipoVia = "g";
+		String opcTipoVia = "g";
 		
 		do {
 			System.out.print("Introduce el tipo de vía: ");
 			System.out.println("\n  1. Calle\n  2. Avenida\n  3. Plaza\n  4. Camino\n  5. Carretera\n  6. Paseo");
 			System.out.println("\nElige una opción: ");
-			tipoVia = scan.next();
-			switch (tipoVia) {
+			opcTipoVia = scan.next();
+			switch (opcTipoVia) {
 			case "1":
 				p.getD().setTipoVia("Calle");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "2":
 				p.getD().setTipoVia("Avenida");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "3":
 				p.getD().setTipoVia("Plaza");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "4":
 				p.getD().setTipoVia("Camino");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "5":
 				p.getD().setTipoVia("Carretera");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "6":
 				p.getD().setTipoVia("Paseo");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			default:
 				System.out.println("ERROR! Ese dato no es válido");
 				break;
 			}
-		} while (!tipoVia.contentEquals("0"));
+		} while (!opcTipoVia.contentEquals("0"));
 		
 		System.out.print("Introduce el nombre: ");
 		scan.nextLine();
@@ -165,6 +165,7 @@ public class Agencia {
 		p.setLetraPuerta(scan.next().charAt(0));
 
 		inmuebles.add(p);
+		System.out.println();
 	}
 
 	public static void rellenarCasas(Casa c) {
@@ -193,53 +194,53 @@ public class Agencia {
 		
 		c.setMetrosCuadrados(z);
 		System.out.print("Introduce la dirección de la casa: \n");
-		String tipoVia = "g";
+		String opcTipoVia = "g";
 		
 		do {
 			System.out.print("Introduce el tipo de vía: ");
 			System.out.println("\n  1. Calle\n  2. Avenida\n  3. Plaza\n  4. Camino\n  5. Carretera\n  6. Paseo");
 			System.out.println("\nElige una opción: ");
-			tipoVia = scan.next();
-			switch (tipoVia) {
+			opcTipoVia = scan.next();
+			switch (opcTipoVia) {
 			case "1":
 				c.getD().setTipoVia("Calle");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "2":
 				c.getD().setTipoVia("Avenida");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "3":
 				c.getD().setTipoVia("Plaza");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "4":
 				c.getD().setTipoVia("Camino");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "5":
 				c.getD().setTipoVia("Carretera");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			case "6":
 				c.getD().setTipoVia("Paseo");
-				tipoVia = "0";
+				opcTipoVia = "0";
 				break;
 			default:
 				System.out.println("ERROR! Ese dato no es válido");
 				break;
 			}
-		} while (!tipoVia.contentEquals("0"));
+		} while (!opcTipoVia.contentEquals("0"));
 		
 		System.out.print("Introduce el nombre: ");
 		scan.nextLine();
 		c.getD().setNombre(scan.nextLine());
-		System.out.print("Introduce el número: ");
+		System.out.print("Introduce el número de la casa: ");
 		x = scan.nextInt();
 		
 		while(x < 0) {
 			System.out.println("Error! El número de la casa no puede ser negativo");
-			System.out.print("Introduce el número: ");
+			System.out.print("Introduce el número de la casa: ");
 			x = scan.nextInt();
 		}
 		
@@ -310,6 +311,7 @@ public class Agencia {
 		} while (!toret.contentEquals("0"));
 
 		inmuebles.add(c);
+		System.out.println();
 	}
 
 	public static void añadirInmuebles() {
@@ -424,7 +426,7 @@ public class Agencia {
 		int x;
 		String opcDirec = "0";
 		do {
-			System.out.println("La dirección actual es: " + inmuebles.get(pos_id).getD().getDireccion());
+			System.out.println("La dirección actual es: " + inmuebles.get(pos_id).getD().toString());
 			System.out.println("Nota: Teclea el 0 para dejar de modificar el inmueble \n¿Que es lo que quieres modificar de la dirección?");
 			System.out.println("  1. El tipo de vía\n  2. El nombre\n  3. El número\n  4. El código postal\n  5. Cambiar toda la dirección a la vez\n  0. No cambiar nada en la dirección");
 			System.out.println("\nElige una opción: ");
@@ -432,44 +434,44 @@ public class Agencia {
 			
 			switch (opcDirec) {
 			case "1":
-				System.out.println("El actual tipo de vía es " + inmuebles.get(pos_id).getD().getTipoVia());
-				String tipoVia = "g";
+				System.out.println("El actual tipo de vía es un/a " + inmuebles.get(pos_id).getD().getTipoVia());
+				String opcTipoVia = "g";
 				
 				do {
 					System.out.print("Introduce el tipo de vía: ");
 					System.out.println("\n  1. Calle\n  2. Avenida\n  3. Plaza\n  4. Camino\n  5. Carretera\n  6. Paseo");
 					System.out.println("\nElige una opción: ");
-					tipoVia = scan.next();
-					switch (tipoVia) {
+					opcTipoVia = scan.next();
+					switch (opcTipoVia) {
 					case "1":
 						inmuebles.get(pos_id).getD().setTipoVia("Calle");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "2":
 						inmuebles.get(pos_id).getD().setTipoVia("Avenida");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "3":
 						inmuebles.get(pos_id).getD().setTipoVia("Plaza");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "4":
 						inmuebles.get(pos_id).getD().setTipoVia("Camino");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "5":
 						inmuebles.get(pos_id).getD().setTipoVia("Carretera");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "6":
 						inmuebles.get(pos_id).getD().setTipoVia("Paseo");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					default:
 						System.out.println("ERROR! Ese dato no es válido");
 						break;
 					}
-				} while (!tipoVia.contentEquals("0"));
+				} while (!opcTipoVia.contentEquals("0"));
 				
 				System.out.println();
 				break;
@@ -508,45 +510,45 @@ public class Agencia {
 				System.out.println();
 				break;
 			case "5":
-				System.out.println("La dirección actual es: " + inmuebles.get(pos_id).getD().getDireccion());
+				System.out.println("La dirección actual es: " + inmuebles.get(pos_id).getD().toString());
 				
-				tipoVia = "g";
+				opcTipoVia = "g";
 				
 				do {
 					System.out.print("Introduce el tipo de vía: ");
 					System.out.println("\n  1. Calle\n  2. Avenida\n  3. Plaza\n  4. Camino\n  5. Carretera\n  6. Paseo");
 					System.out.println("\nElige una opción: ");
-					tipoVia = scan.next();
-					switch (tipoVia) {
+					opcTipoVia = scan.next();
+					switch (opcTipoVia) {
 					case "1":
 						inmuebles.get(pos_id).getD().setTipoVia("Calle");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "2":
 						inmuebles.get(pos_id).getD().setTipoVia("Avenida");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "3":
 						inmuebles.get(pos_id).getD().setTipoVia("Plaza");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "4":
 						inmuebles.get(pos_id).getD().setTipoVia("Camino");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "5":
 						inmuebles.get(pos_id).getD().setTipoVia("Carretera");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					case "6":
 						inmuebles.get(pos_id).getD().setTipoVia("Paseo");
-						tipoVia = "0";
+						opcTipoVia = "0";
 						break;
 					default:
 						System.out.println("ERROR! Ese dato no es válido");
 						break;
 					}
-				} while (!tipoVia.contentEquals("0"));
+				} while (!opcTipoVia.contentEquals("0"));
 				
 				System.out.print("Introduce el nombre: ");
 				scan.nextLine();
@@ -1415,18 +1417,18 @@ public class Agencia {
 	public static void listarPorPrecio() {
 		float precioMin, precioMax;
 
-		System.out.println("Introduzca el rango de precios que quieres buscar los pisos");
-		System.out.println("Introduzca el precio minimo: ");
+		System.out.println("Introduzca el rango de precios que quieres buscar los inmuebles");
+		System.out.println("Introduzca el precio base minimo: ");
 		precioMin = scan.nextFloat();
-		System.out.println("Introduzca el precio maximo: ");
+		System.out.println("Introduzca el precio base maximo: ");
 		precioMax = scan.nextFloat();
 
 		while (precioMin > precioMax) {
-			System.out.println("El precio minimo no puede ser mayor que el precio maximo y el precio maximo no puede ser menor que el precio minimo");
-			System.out.println("Introduzca el rango de precios que quieres buscar los pisos");
-			System.out.println("Introduzca el precio minimo: ");
+			System.out.println("El precio base minimo no puede ser mayor que el precio base maximo y el precio base maximo no puede ser menor que el precio base minimo");
+			System.out.println("Introduzca el rango de precios que quieres buscar los inmuebles");
+			System.out.println("Introduzca el precio base minimo: ");
 			precioMin = scan.nextFloat();
-			System.out.println("Introduzca el precio maximo: ");
+			System.out.println("Introduzca el precio base maximo: ");
 			precioMax = scan.nextFloat();
 		}
 
@@ -1481,7 +1483,7 @@ public class Agencia {
 					}
 				}
 			} else {
-				System.out.println("No hay ningún piso en alquiler entre esos valores");
+				System.out.println("No hay ningún piso en alquiler entre esos valores\n");
 			}
 
 			if (tamañoC != 0) {
@@ -1496,7 +1498,7 @@ public class Agencia {
 					}
 				}
 			} else {
-				System.out.println("No hay ninguna casa en alquiler entre esos valores");
+				System.out.println("No hay ninguna casa en alquiler entre esos valores\n");
 			}
 
 			if (tamaño != 1) {
@@ -1524,7 +1526,7 @@ public class Agencia {
 			}
 
 		} else {
-			System.out.println("No hay ningún inmueble en alquiler entre esos valores");
+			System.out.println("No hay ningún inmueble en alquiler entre esos valores\n");
 		}
 
 		lista_pisos.clear();
@@ -1560,7 +1562,7 @@ public class Agencia {
 					}
 				}
 			} else {
-				System.out.println("No hay ningún piso en venta entre esos valores");
+				System.out.println("No hay ningún piso en venta entre esos valores\n");
 			}
 
 			if (tamañoC != 0) {
@@ -1575,11 +1577,11 @@ public class Agencia {
 					}
 				}
 			} else {
-				System.out.println("No hay ninguna casa en venta entre esos valores");
+				System.out.println("No hay ninguna casa en venta entre esos valores\n");
 			}
 
 			if (tamaño != 1) {
-				System.out.println("\nInmuebles en Venta");
+				System.out.println("Inmuebles en Venta");
 			}
 
 			if (tamañoP == 1) {
@@ -1615,8 +1617,7 @@ public class Agencia {
 	public static void listarPorMetrosCuadrados() {
 		float metrosMin, metrosMax;
 
-		System.out.println("El minimo de metros cuadrados no puede ser mayor que el maximo de metros cuadrados \ny el maximo de metros cuadrados no puede ser menor que el minimo de metros cuadrados");
-		System.out.println("\nIntroduzca el rango que quieres buscar los pisos");
+		System.out.println("\nIntroduzca el rango que quieres buscar los inmuebles");
 		System.out.println("Introduzca el minimo de metros cuadrados: ");
 		metrosMin = scan.nextFloat();
 		System.out.println("Introduzca el maximo de metros cuadrados: ");
@@ -1624,7 +1625,7 @@ public class Agencia {
 
 		while (metrosMin > metrosMax) {
 			System.out.println("El minimo de metros cuadrados no puede ser mayor que el maximo de metros cuadrados \ny el maximo de metros cuadrados no puede ser menor que el minimo de metros cuadrados");
-			System.out.println("\nIntroduzca el rango que quieres buscar los pisos");
+			System.out.println("\nIntroduzca el rango que quieres buscar los inmuebles");
 			System.out.println("Introduzca el minimo de metros cuadrados: ");
 			metrosMin = scan.nextFloat();
 			System.out.println("Introduzca el maximo de metros cuadrados: ");
@@ -1777,7 +1778,7 @@ public class Agencia {
 											validoA = 1;
 										}
 									} else {
-										System.out.println("No queda ninguna casa para alquilar");
+										System.out.println("No queda ninguna casa para alquilar\n");
 										validoA = 1;
 									}
 								} while(validoA == 0);
