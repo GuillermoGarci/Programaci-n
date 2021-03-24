@@ -1,4 +1,4 @@
-public class Piso extends Inmueble implements Impuestos {
+public class Piso extends Inmueble {
 	private int numeroPiso;
 	private char letraPuerta;
 	private boolean estudio;
@@ -54,24 +54,10 @@ public class Piso extends Inmueble implements Impuestos {
 		return texto;
 	}
 
-	//Este método será llamado en el toString para mostrar el precio con los impuestos
-	@Override
-	public float sumaImpuesto() {
-		float precioFinal;
-		
-		if (isAlquilado() == false) {
-			precioFinal = getPrecio() + getPrecio() * IVA / 100;
-		}
-		
-		precioFinal = getPrecio() + getPrecio() * ITP / 100;
-		return precioFinal;
-	}
-
 	//Este toString muestra todos los datos del piso
 	@Override
 	public String toString() {
-		return "Piso en " + alquilados() + " : " + getId() + "(ID)" + "\nPrecio: " + getPrecio() + "\nPrecio final: "
-				+ sumaImpuesto() + super.toString() + "\nNumero del piso es: " + getNumeroPiso()
+		return "Piso en " + alquilados() + " : " + getId() + "(ID)" + super.toString() + "\nNumero del piso es: " + getNumeroPiso()
 				+ "\nLetra de la puerta es: " + getLetraPuerta() + "\nEstudio: " + estudio();
 	}
 }

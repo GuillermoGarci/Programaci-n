@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-
-public abstract class Inmueble {
+public abstract class Inmueble implements Impuestos{
 	private float precio;
 	private float metrosCuadrados;
 	private int id;
 	private static int idActual = 1;
-	//private static ArrayList<Direccion> direccion = new ArrayList<Direccion>();
-	Direccion direccion = new Direccion();
+	private Direccion d = new Direccion();
 	private int numHabitaciones;
 	private boolean alquilado;
 
@@ -19,13 +16,10 @@ public abstract class Inmueble {
 		this.precio = precio;
 		this.metrosCuadrados = metrosCuadrados;
 		this.id = idActual++;
-		//Direccion direccion = new Direccion(tipoVia, nombre, numero, cp);
-		direccion.setTipoVia(tipoVia);
-		direccion.direccionCompleta(tipoVia, nombre, numero, cp);
-		//this.tipoVia = tipoVia;
-		//this.nombre = nombre;
-		//this.numero = numero;
-		//this.cp = cp;
+		this.d.setTipoVia(tipoVia);
+		this.d.setNombre(nombre);
+		this.d.setNumero(numero);
+		this.d.setCp(cp);
 		this.numHabitaciones = numHabitaciones;
 		this.alquilado = alquilado;
 	}
@@ -53,6 +47,14 @@ public abstract class Inmueble {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public Direccion getD() {
+		return d;
+	}
+
+	public void setD(Direccion d) {
+		this.d = d;
+	}
 
 	public int getNumHabitaciones() {
 		return numHabitaciones;
@@ -74,18 +76,32 @@ public abstract class Inmueble {
 	public String alquilados() {
 		String texto = "Venta";
 
-		if (alquilado) {
+		if (isAlquilado() == true) {
 			texto = "Alquiler";
 		}
 
 		return texto;
 	}
+	
+	//Este método será llamado en el toString para mostrar el precio con los impuestos
+		@Override
+		public float sumaImpuesto() {
+			float precioFinal;
+			
+			if (isAlquilado() == false) {
+				precioFinal = (getPrecio() + getPrecio() * IVA / 100) + (getPrecio() + getPrecio() * ITP / 100);
+			} else {
+				precioFinal = getPrecio() + getPrecio() * ITP / 100;
+			}
+			
+			return precioFinal;
+		}
 
 	/*Este método muestra algunos datos que tienen los pisos y las casas en común, será llamado en las clases Piso y 
 	Casa en sus repectivos toString*/
-	//@Override
-	//public String toString() {
-		//return "\nLos metros cuadrados: " + getMetrosCuadrados() + "\nLa dirección es: " + direccion.direccionCompleta()
-				//+ "\nEl número de habitaciones es: " + getNumHabitaciones();
-	//}
+	@Override
+	public String toString() {
+		return "\nPrecio: " + getPrecio() + "\nPrecio final: " + sumaImpuesto() + "\nLos metros cuadrados: " + getMetrosCuadrados() + "\nLa dirección es: " + this.d.toString()
+				+ "\nEl número de habitaciones es: " + getNumHabitaciones();
+	}
 }

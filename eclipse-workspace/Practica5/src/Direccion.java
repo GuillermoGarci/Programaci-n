@@ -9,13 +9,6 @@ public class Direccion {
 		
 	}
 	
-	public Direccion(String tipoVia, String nombre, int numero, int cp) {
-		this.tipoVia = tipoVia;
-		this.nombre = nombre;
-		this.numero = numero;
-		this.cp = cp;
-	}
-	
 	public String getDireccion() {
 		return direccion;
 	}
@@ -56,11 +49,7 @@ public class Direccion {
 		this.cp = cp;
 	}
 	
-	public String direccionCompleta(String tipoVia, String nombre, int numero, int cp) {
-		return this.direccion = tipoVia + " " + nombre + " " + numero + " " + cp;
-	}
-	
 	public String toString() {
-		return direccionCompleta(tipoVia, nombre, numero, cp);
+		return this.direccion = tipoVia + " " + nombre + " " + numero + " " + cp;
 	}
 }

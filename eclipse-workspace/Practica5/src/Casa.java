@@ -1,4 +1,4 @@
-public class Casa extends Inmueble implements Impuestos {
+public class Casa extends Inmueble {
 	private boolean jardin;
 	private boolean garaje;
 
@@ -11,7 +11,6 @@ public class Casa extends Inmueble implements Impuestos {
 		super(precio, metrosCuadrados, tipoVia, nombre, numero, cp, numHabitaciones, alquilado);
 		this.jardin = jardin;
 		this.garaje = garaje;
-		sumaImpuesto();
 	}
 
 	public boolean isJardin() {
@@ -52,22 +51,9 @@ public class Casa extends Inmueble implements Impuestos {
 		return texto;
 	}
 
-	//Este método será llamado en el toString para mostrar el precio con los impuestos
-	@Override
-	public float sumaImpuesto() {
-		float precioFinal;
-		if (isAlquilado() == false) {
-			precioFinal = getPrecio() + getPrecio() * IVA / 100;
-		}
-		
-		precioFinal = getPrecio() + getPrecio() * ITP / 100;
-		return precioFinal;
-	}
-
 	//Este toString muestra todos los datos de la casa
 	@Override
 	public String toString() {
-		return "Casa en " + alquilados() + " : " + getId() + "(ID)" + "\nPrecio: " + getPrecio() + "\nPrecio final: "
-				+ sumaImpuesto() + super.toString() + "\nJardin: " + jardin() + "\nGaraje: " + garaje();
+		return "Casa en " + alquilados() + " : " + getId() + "(ID)" + super.toString() + "\nJardin: " + jardin() + "\nGaraje: " + garaje();
 	}
 }
