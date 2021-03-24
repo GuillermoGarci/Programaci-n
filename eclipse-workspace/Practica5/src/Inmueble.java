@@ -89,9 +89,9 @@ public abstract class Inmueble implements Impuestos{
 			float precioFinal;
 			
 			if (isAlquilado() == false) {
-				precioFinal = (getPrecio() + getPrecio() * IVA / 100) + (getPrecio() + getPrecio() * ITP / 100);
+				precioFinal = (getPrecio() + (getPrecio() * (ITP + IVA) / 100));
 			} else {
-				precioFinal = getPrecio() + getPrecio() * ITP / 100;
+				precioFinal = getPrecio() + (getPrecio() * ITP / 100);
 			}
 			
 			return precioFinal;
