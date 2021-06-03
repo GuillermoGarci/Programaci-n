@@ -1,0 +1,8 @@
+#Fichero de configuración.
+#Thu Jun 03 13:09:40 CEST 2021
+port=3306
+url=jdbc\:mysql\://localhost\:3306/tiendaVG1?useServerPrepStmts\=true
+password=root
+host=localhost
+database=tiendaVG1
+username=root
